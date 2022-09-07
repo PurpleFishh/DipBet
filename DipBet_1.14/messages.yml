@@ -31,9 +31,9 @@ money_select: "&aYou had selected the sum of %sum%!"
 # The message that the player gets when he wants to select a sum less the 0
 make_less_zero: "&cYour amount is already 0!"
 # The message that the player gets when he win, use %sum% for the amount of money that he wins
-win: "&aYou win: %sum%!"
+win: "&aYou won: %sum%!"
 # The message that the player gets when he lose
-lose: "&cYou lose!"
+lose: "&cYou lost!"
 # The message that the player gets when he the game stats
 start: "&aThe roulette has stared!"
 # The message that the player gets when he the game stats in some time, use %minutes% for the minutes remain and %seconds% for the seconds that remain

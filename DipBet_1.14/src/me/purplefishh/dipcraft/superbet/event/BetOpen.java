@@ -23,7 +23,7 @@ import me.purplefishh.dipcraft.superbet.utils.Rotire;
 
 public class BetOpen implements Listener {
 
-	public static HashMap<Player, Inventory> invs = new HashMap<>();
+	public static HashMap<Player, Inventory> invs = new HashMap<Player, Inventory>();
 
 	@EventHandler
 	void OpenInvBET(PlayerInteractEvent e) {

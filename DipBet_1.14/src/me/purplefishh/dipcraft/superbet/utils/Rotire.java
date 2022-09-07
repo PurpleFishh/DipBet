@@ -33,7 +33,7 @@ public class Rotire {
 		return ra;
 	}
 
-	public static void InvRotire(Inventory inv, Player p) {
+	public static void InvRotire(final Inventory inv, final Player p) {
 		if (Resorce.separate_roulette())
 			starts.put(p, true);
 		else

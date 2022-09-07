@@ -57,11 +57,18 @@ public class Main extends JavaPlugin {
 		if (Resorce.separate_roulette() == false) {
 			inv = Bukkit.createInventory(null, 45, Repleace.repleace(Resorce.main_inv_name()));
 			ColorUtils.colorinv(inv);
+
 		}
 	}
 
 	public static boolean legacy() {
-		if (version2.contains("1.16")) {
+		if (version2.contains("1.19")) {
+			return false;
+		} else if (version2.contains("1.18")) {
+			return false;
+		} else if (version2.contains("1.17")) {
+			return false;
+		} else if (version2.contains("1.16")) {
 			return false;
 		} else if (version2.contains("1.15")) {
 			return false;
@@ -125,7 +132,7 @@ public class Main extends JavaPlugin {
 	public static void reloadConf() {
 		if (legacy() == false) {
 			File file = new File(pl.getDataFolder().getAbsolutePath() + "/config.yml");
-		    cf = YamlConfiguration.loadConfiguration(file);
+			cf = YamlConfiguration.loadConfiguration(file);
 		} else {
 			try {
 				conflegacy.load(filelegacy);

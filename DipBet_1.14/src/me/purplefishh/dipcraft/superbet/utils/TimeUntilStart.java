@@ -15,7 +15,7 @@ public class TimeUntilStart {
 	public static boolean start = false;
 	public static HashMap<Player, Boolean> starts = new HashMap<>();
 
-	public static void start(Player p, Inventory inv) {
+	public static void start(final Player p, final Inventory inv) {
 		if (Resorce.separate_roulette())
 			starts.put(p, true);
 		else
