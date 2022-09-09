@@ -24,6 +24,8 @@ get_item: "&aYou have received the betting item."
 get_another_item: "&cYou already have the betting item."
 # The message that the player gets when he wants to bet when the roulette is already started
 started_game: "&cYou can't bet when the roulette is already started!"
+# The message that the player gets when he already placed a bet on an color and he wants to bet on other color
+already_betted: "&cYou have already placed a bet!"
 # The message that the player gets when he wants to bet a amount of 0 money
 no_money_bet: "&cYou can't bet with the amount of 0 money!"
 # The message that the player gets when he select a amount of money, use %sum% for the amount of money

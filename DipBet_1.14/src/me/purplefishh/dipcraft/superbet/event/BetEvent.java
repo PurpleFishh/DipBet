@@ -17,10 +17,10 @@ import me.purplefishh.dipcraft.superbet.utils.BaniInv;
 import me.purplefishh.dipcraft.superbet.utils.TimeUntilStart;
 import net.milkbowl.vault.economy.Economy;
 
-
 public class BetEvent implements Listener {
 
 	public List<Player> intentionalbet = new ArrayList<Player>();
+
 	@EventHandler
 	public void PutMoneyEvent(InventoryClickEvent e) {
 		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.bet_inv_name())) && e.getCurrentItem() != null) {
@@ -34,7 +34,7 @@ public class BetEvent implements Listener {
 				if (!Resorce.pariubani.containsKey(p) || Resorce.pariubani.get(p) == 0) {
 					p.sendMessage(Resorce.no_money_bet());
 				} else {
-					
+
 					// Place Bet
 					if (Resorce.separate_roulette()) {
 						if (TimeUntilStart.starts.containsKey(p) && TimeUntilStart.starts.get(p) == false)
@@ -65,60 +65,44 @@ public class BetEvent implements Listener {
 				e.setCancelled(true);
 				return;
 			}
-			
+
+			// Choosing the betting sum
 			int bani = money(e.getSlot());
 			if (Resorce.pariubani.keySet().contains(p) == false)
 				Resorce.pariubani.put(p, 0);
 			int sumapariu = Resorce.pariubani.get(p);
-			if (e.getSlot() >= 10 && e.getSlot() <= 16) {
-				sumapariu += bani;
-				if (sumapariu > getmoney(p))
-					sumapariu = (int) getmoney(p);
-				p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
+			if (sumapariu == 0 && bani < 0) {
+				p.sendMessage(Resorce.make_less_zero());
+				e.setCancelled(true);
+				return;
 			}
-			if (e.getSlot() >= 19 && e.getSlot() <= 25) {
-				if (sumapariu == 0) {
-					p.sendMessage(Resorce.make_less_zero());
-					e.setCancelled(true);
-					return;
-				}
-				sumapariu -= bani;
-				if (sumapariu < 0)
-					sumapariu = 0;
-				p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
-			}
+			sumapariu += bani;
+			if (sumapariu < 0)
+				sumapariu = 0;
+			if (sumapariu > getmoney(p))
+				sumapariu = (int) getmoney(p);
+
+			p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
 
 			int color = Resorce.pariu.get(p);
 			if (color == 1) {
-				Resorce.blackpariu -= Resorce.pariubani.get(p);
+				Resorce.blackpariu = Resorce.blackpariu - Resorce.pariubani.get(p) + sumapariu;
 				changebuton(1, Resorce.blackpariu, p);
 			}
 			if (color == 2) {
-				Resorce.redpariu -= Resorce.pariubani.get(p);
+				Resorce.redpariu = Resorce.redpariu - Resorce.pariubani.get(p) + sumapariu;
+				System.out.println(Resorce.redpariu);
 				changebuton(2, Resorce.redpariu, p);
 			}
 			if (color == 3) {
-				Resorce.greenpariu -= Resorce.pariubani.get(p);
+				Resorce.greenpariu = Resorce.greenpariu - Resorce.pariubani.get(p) + sumapariu;
 				changebuton(3, Resorce.greenpariu, p);
 			}
 
 			Resorce.pariubani.replace(p, sumapariu);
-
-			if (color == 1) {
-				Resorce.blackpariu += Resorce.pariubani.get(p);
-				changebuton(1, Resorce.blackpariu, p);
-			}
-			if (color == 2) {
-				Resorce.redpariu += Resorce.pariubani.get(p);
-				changebuton(2, Resorce.redpariu, p);
-			}
-			if (color == 3) {
-				Resorce.greenpariu += Resorce.pariubani.get(p);
-				changebuton(3, Resorce.greenpariu, p);
-			}
-
 			e.setCancelled(true);
 		}
+
 	}
 
 	@EventHandler
@@ -148,20 +132,16 @@ public class BetEvent implements Listener {
 		}
 	}
 
-	@SuppressWarnings({ "deprecation" })
 	public double getmoney(Player p) {
 		Economy eco = Main.getEconomy();
 		double money = 0;
-		money = eco.getBalance(p.getName());
+		money = eco.getBalance(p);
 		return money;
 	}
 
-	@SuppressWarnings({ "deprecation" })
 	public void removemoney(Player p, int sum) {
 		Economy eco = Main.getEconomy();
-		// double money = (int) getmoney(p);
-		// eco.setMoney(p.getName(), money - sum);
-		eco.withdrawPlayer(p.getName(), sum);
+		eco.withdrawPlayer(p, sum);
 
 	}
 
@@ -182,19 +162,19 @@ public class BetEvent implements Listener {
 		case 16:
 			return Resorce.bet_amount(1);
 		case 19:
-			return Resorce.bet_amount(7);
+			return -Resorce.bet_amount(7);
 		case 20:
-			return Resorce.bet_amount(6);
+			return -Resorce.bet_amount(6);
 		case 21:
-			return Resorce.bet_amount(5);
+			return -Resorce.bet_amount(5);
 		case 22:
-			return Resorce.bet_amount(4);
+			return -Resorce.bet_amount(4);
 		case 23:
-			return Resorce.bet_amount(3);
+			return -Resorce.bet_amount(3);
 		case 24:
-			return Resorce.bet_amount(2);
+			return -Resorce.bet_amount(2);
 		case 25:
-			return Resorce.bet_amount(1);
+			return -Resorce.bet_amount(1);
 
 		}
 		return 0;

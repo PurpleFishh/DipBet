@@ -72,21 +72,27 @@ public class BetOpen implements Listener {
 			// || item.getType().equals(Resorce.black_button(0).getType()))
 			// This math means the positions of putting an bet items(red, green, black)
 			if (e.getSlot() == 4 * 9 + 3 - 1 || e.getSlot() == 4 * 9 + 5 - 1 || e.getSlot() == 4 * 9 + 7 - 1) {
-				if (Resorce.separate_roulette()) {
-					if (Rotire.starts.containsKey(p) && Rotire.starts.get(p) == true)
-						p.sendMessage(Resorce.started_game());
-					else {
-						Resorce.pariu.put(p, code(item.getType()));
-						p.openInventory(BaniInv.invBani());
-					}
+				if (Resorce.pariubani.containsKey(p) && Resorce.pariubani.get(p) != 0
+						&& Resorce.pariu.get(p) != code(item.getType())) {
+					p.sendMessage(Resorce.already_betted());
 				} else {
-					if (Rotire.start == true)
-						p.sendMessage(Resorce.started_game());
-					else {
-						Resorce.pariu.put(p, code(item.getType()));
-						p.openInventory(BaniInv.invBani());
+					if (Resorce.separate_roulette()) {
+						if (Rotire.starts.containsKey(p) && Rotire.starts.get(p) == true)
+							p.sendMessage(Resorce.started_game());
+						else {
+							Resorce.pariu.put(p, code(item.getType()));
+							p.openInventory(BaniInv.invBani());
+						}
+					} else {
+						if (Rotire.start == true)
+							p.sendMessage(Resorce.started_game());
+						else {
+							Resorce.pariu.put(p, code(item.getType()));
+							p.openInventory(BaniInv.invBani());
+						}
 					}
 				}
+
 			}
 			e.setCancelled(true);
 		}

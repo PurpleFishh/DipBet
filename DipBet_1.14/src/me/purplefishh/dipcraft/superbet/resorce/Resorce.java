@@ -63,6 +63,10 @@ public class Resorce {
 		return wmput(color(msg().getString("get_item")));
 	}
 
+	public static String already_betted() {
+		return wmput(color(msg().getString("already_betted")));
+	}
+	
 	public static String started_game() {
 		return wmput(color(msg().getString("started_game")));
 	}
