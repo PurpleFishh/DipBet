@@ -20,9 +20,10 @@ public class TimeUntilStart {
 			starts.put(p, true);
 		else
 			start = true;
+		
 		new BukkitRunnable() {
 			int t = Resorce.time();
-
+			
 			@Override
 			public void run() {
 				inv.setItem(36, Resorce.status_timer(t - 1));

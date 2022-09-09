@@ -25,95 +25,80 @@ public class BetOpen implements Listener {
 
 	public static HashMap<Player, Inventory> invs = new HashMap<Player, Inventory>();
 
+	// Event for opening main inventory for betting
 	@EventHandler
-	void OpenInvBET(PlayerInteractEvent e) {
-		if (e.getItem() != null && e.getItem().getType() != Material.AIR)
-			if (e.getItem().equals(Resorce.BetItem())) {
-				if (!e.getPlayer().getOpenInventory().getTitle().equals(Repleace.repleace(Resorce.bet_inv_name()))
-						&& !e.getPlayer().getOpenInventory().getTitle()
-								.equals(Repleace.repleace(Resorce.main_inv_name()))
-						&& !e.getPlayer().getOpenInventory().getTitle()
-								.equals(Repleace.repleace(Resorce.last_colors_inv_name()))) {
-
-					if (Resorce.separate_roulette()) {
-						if (invs.containsKey(e.getPlayer()))
-							e.getPlayer().openInventory(invs.get(e.getPlayer()));
-						else {
-							Inventory inv = Bukkit.createInventory(null, 45,
-									Repleace.repleace(Resorce.main_inv_name()));
-							ColorUtils.colorinv(inv);
-							e.getPlayer().openInventory(inv);
-							invs.put(e.getPlayer(), inv);
-						}
-					} else {
-						e.getPlayer().openInventory(Main.inv);
-					}
+	void OpenBettingInv(PlayerInteractEvent e) {
+		if (e.getItem() != null && e.getItem().equals(Resorce.BetItem())) {
+			if (Resorce.separate_roulette()) {
+				if (invs.containsKey(e.getPlayer()))
+					e.getPlayer().openInventory(invs.get(e.getPlayer()));
+				else {
+					Inventory inv = Bukkit.createInventory(null, 45, Repleace.repleace(Resorce.main_inv_name()));
+					ColorUtils.colorinv(inv);
+					e.getPlayer().openInventory(inv);
+					invs.put(e.getPlayer(), inv);
 				}
-				e.setCancelled(true);
-			}
-
+			} else
+				e.getPlayer().openInventory(Main.inv);
+			e.setCancelled(true);
+		}
 	}
 
+	// The option to delete the bet item from inv after closing the GUI
 	@EventHandler
 	public void DeleteOnClose(InventoryCloseEvent e) {
 		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.main_inv_name()))) {
-			// if (Resorce.separate_roulette())
-			// invs.remove(e.getPlayer());
 			if (Resorce.delete_after_bet())
 				e.getPlayer().getInventory().remove(Resorce.BetItem());
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	// Interaction in the betting inv
 	@EventHandler
-	void Rot(InventoryClickEvent e) {
-		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.main_inv_name()))) {
-			if (e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR) {
-				if (e.getCurrentItem().equals(Resorce.main_bg()) || e.getCurrentItem().equals(Resorce.line_bg()))
-					e.setCancelled(true);
-				if (e.getCurrentItem().equals(Resorce.back()))
-					e.getWhoClicked().closeInventory();
-				if (e.getCurrentItem().equals(Resorce.last_colors())) {
-					e.getWhoClicked()
-							.openInventory(LastColorsInventory.last_colors_inventory((Player) e.getWhoClicked()));
-				}
-				ItemStack item = e.getCurrentItem();
-				if ((item.getType().equals(Resorce.red_button(0).getType())
-						|| item.getType().equals(Resorce.green_button(0).getType())
-						|| item.getType().equals(Resorce.black_button(0).getType()))
-						&& (e.getSlot() == 4 * 9 + 3 - 1 || e.getSlot() == 4 * 9 + 5 - 1
-								|| e.getSlot() == 4 * 9 + 7 - 1)) {
-					if (Resorce.separate_roulette()) {
-						if (Rotire.starts.containsKey(e.getWhoClicked())
-								&& Rotire.starts.get(e.getWhoClicked()) == true)
-							e.getWhoClicked().sendMessage(Resorce.started_game());
-						else {
-							Resorce.pariu.put((Player) e.getWhoClicked(), code(e.getCurrentItem().getData().getData()));
-							e.getWhoClicked().openInventory(BaniInv.invBani());
-						}
-					} else {
-						if (Rotire.start == true) {
-							e.getWhoClicked().sendMessage(Resorce.started_game());
-						} else {
-							Resorce.pariu.put((Player) e.getWhoClicked(), code(e.getCurrentItem().getData().getData()));
-							e.getWhoClicked().openInventory(BaniInv.invBani());
-						}
+	void ClickinBettingInv(InventoryClickEvent e) {
+		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.main_inv_name())) && e.getCurrentItem() != null) {
+			ItemStack item = e.getCurrentItem();
+			Player p = (Player) e.getWhoClicked();
+			if (item.equals(Resorce.main_bg()) || item.equals(Resorce.line_bg()))
+				e.setCancelled(true);
+			if (item.equals(Resorce.back()))
+				p.closeInventory();
+			if (item.equals(Resorce.last_colors())) {
+				p.openInventory(LastColorsInventory.last_colors_inventory(p));
+			}
+
+			// if ((item.getType().equals(Resorce.red_button(0).getType())
+			// || item.getType().equals(Resorce.green_button(0).getType())
+			// || item.getType().equals(Resorce.black_button(0).getType()))
+			// This math means the positions of putting an bet items(red, green, black)
+			if (e.getSlot() == 4 * 9 + 3 - 1 || e.getSlot() == 4 * 9 + 5 - 1 || e.getSlot() == 4 * 9 + 7 - 1) {
+				if (Resorce.separate_roulette()) {
+					if (Rotire.starts.containsKey(p) && Rotire.starts.get(p) == true)
+						p.sendMessage(Resorce.started_game());
+					else {
+						Resorce.pariu.put(p, code(item.getType()));
+						p.openInventory(BaniInv.invBani());
+					}
+				} else {
+					if (Rotire.start == true)
+						p.sendMessage(Resorce.started_game());
+					else {
+						Resorce.pariu.put(p, code(item.getType()));
+						p.openInventory(BaniInv.invBani());
 					}
 				}
-				e.setCancelled(true);
 			}
+			e.setCancelled(true);
 		}
 	}
 
-	int code(int data) {
-		switch (data) {
-		case 15:
+	int code(Material data) {
+		if (Resorce.black_button(0).getType() == data)
 			return 1;
-		case 14:
+		if (Resorce.red_button(0).getType() == data)
 			return 2;
-		case 13:
+		if (Resorce.green_button(0).getType() == data)
 			return 3;
-		}
 		return -1;
 	}
 }

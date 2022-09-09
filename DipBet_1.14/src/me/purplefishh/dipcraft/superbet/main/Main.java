@@ -24,14 +24,13 @@ import me.purplefishh.dipcraft.superbet.utils.LastColorsInventory;
 import net.milkbowl.vault.economy.Economy;
 
 public class Main extends JavaPlugin {
-	static FileConfiguration cf;
+	
 	public static Plugin pl = null;
-	public static String version;
 	public static Inventory inv;
-	public static String version2 = Bukkit.getVersion().split("\\(MC: ")[1].split("\\)")[0];
+	public static String version = Bukkit.getVersion().split("\\(MC: ")[1].split("\\)")[0];
 
 	static File filelegacy;
-	static FileConfiguration conflegacy;
+	static FileConfiguration config;
 	static File filemessages;
 	static FileConfiguration confmessages;
 
@@ -46,14 +45,12 @@ public class Main extends JavaPlugin {
 			return;
 		}
 
-		cf = getConfig();
 		pl = this;
 
 		configs();
 		messagesConfig();
 		commands();
 		events();
-		System.out.println(legacy());
 		if (Resorce.separate_roulette() == false) {
 			inv = Bukkit.createInventory(null, 45, Repleace.repleace(Resorce.main_inv_name()));
 			ColorUtils.colorinv(inv);
@@ -62,23 +59,20 @@ public class Main extends JavaPlugin {
 	}
 
 	public static boolean legacy() {
-		if (version2.contains("1.19")) {
+		if (version.contains("1.19"))
 			return false;
-		} else if (version2.contains("1.18")) {
+		else if (version.contains("1.18"))
 			return false;
-		} else if (version2.contains("1.17")) {
+		else if (version.contains("1.17"))
 			return false;
-		} else if (version2.contains("1.16")) {
+		else if (version.contains("1.16"))
 			return false;
-		} else if (version2.contains("1.15")) {
+		else if (version.contains("1.15"))
 			return false;
-		} else if (version2.contains("1.14")) {
+		else if (version.contains("1.14"))
 			return false;
-		} else if (version2.contains("1.13")) {
+		else if (version.contains("1.13"))
 			return false;
-		} else if (version2.equals("1.13.2")) {
-			return false;
-		}
 
 		return true;
 	}
@@ -105,10 +99,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public static FileConfiguration config() {
-		if (legacy() == false)
-			return cf;
-		else
-			return conflegacy;
+			return config;
 	}
 
 	public static FileConfiguration msg() {
@@ -119,23 +110,23 @@ public class Main extends JavaPlugin {
 		if (!legacy()) {
 			{
 				saveDefaultConfig();
-				cf = getConfig();
+				config = getConfig();
 			}
 		} else {
 			filelegacy = new File(getDataFolder(), "config_legacy.yml");
 			if (!filelegacy.exists())
 				saveResource("config_legacy.yml", false);
-			conflegacy = YamlConfiguration.loadConfiguration(filelegacy);
+			config = YamlConfiguration.loadConfiguration(filelegacy);
 		}
 	}
 
 	public static void reloadConf() {
 		if (legacy() == false) {
 			File file = new File(pl.getDataFolder().getAbsolutePath() + "/config.yml");
-			cf = YamlConfiguration.loadConfiguration(file);
+			config = YamlConfiguration.loadConfiguration(file);
 		} else {
 			try {
-				conflegacy.load(filelegacy);
+				config.load(filelegacy);
 			} catch (IOException | InvalidConfigurationException e) {
 				e.printStackTrace();
 			}

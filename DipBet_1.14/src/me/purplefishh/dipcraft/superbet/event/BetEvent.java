@@ -3,12 +3,12 @@ package me.purplefishh.dipcraft.superbet.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.ItemStack;
 
 import me.purplefishh.dipcraft.superbet.main.Main;
 import me.purplefishh.dipcraft.superbet.resorce.Repleace;
@@ -17,109 +17,107 @@ import me.purplefishh.dipcraft.superbet.utils.BaniInv;
 import me.purplefishh.dipcraft.superbet.utils.TimeUntilStart;
 import net.milkbowl.vault.economy.Economy;
 
+
 public class BetEvent implements Listener {
 
 	public List<Player> intentionalbet = new ArrayList<Player>();
-
 	@EventHandler
 	public void PutMoneyEvent(InventoryClickEvent e) {
-		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.bet_inv_name()))) {
-			if (e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR) {
-				if (e.getCurrentItem().equals(Resorce.main_bg()) || e.getCurrentItem().equals(Resorce.line_bg()))
-					e.setCancelled(true);
-				if (e.getCurrentItem().equals(Resorce.put_item())) {
-					if (!Resorce.pariubani.containsKey(e.getWhoClicked())
-							|| Resorce.pariubani.get(e.getWhoClicked()) == 0) {
-						Resorce.pariubani.remove(e.getWhoClicked());
-						Resorce.pariu.remove(e.getWhoClicked());
-						e.getWhoClicked().sendMessage(Resorce.no_money_bet());
-
+		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.bet_inv_name())) && e.getCurrentItem() != null) {
+			ItemStack item = e.getCurrentItem();
+			Player p = (Player) e.getWhoClicked();
+			if (item.equals(Resorce.main_bg()) || item.equals(Resorce.line_bg()))
+				e.setCancelled(true);
+			// The finish button
+			if (item.equals(Resorce.put_item())) {
+				// Verify if he wants to bet when his amount = 0
+				if (!Resorce.pariubani.containsKey(p) || Resorce.pariubani.get(p) == 0) {
+					p.sendMessage(Resorce.no_money_bet());
+				} else {
+					
+					// Place Bet
+					if (Resorce.separate_roulette()) {
+						if (TimeUntilStart.starts.containsKey(p) && TimeUntilStart.starts.get(p) == false)
+							TimeUntilStart.start(p, BetOpen.invs.get(p));
+						removemoney(p, Resorce.pariubani.get(p));
+						intentionalbet.add(p);
+						e.getWhoClicked().openInventory(BetOpen.invs.get(p));
 					} else {
-						if (Resorce.separate_roulette()) {
-							if (TimeUntilStart.starts.containsKey(e.getWhoClicked())
-									&& TimeUntilStart.starts.get(e.getWhoClicked()) == false)
-								TimeUntilStart.start((Player) e.getWhoClicked(),
-										BetOpen.invs.get((Player) e.getWhoClicked()));
-							removemoney((Player) e.getWhoClicked(), Resorce.pariubani.get(e.getWhoClicked()));
-							intentionalbet.add((Player) e.getWhoClicked());
-							e.getWhoClicked().openInventory(BetOpen.invs.get((Player) e.getWhoClicked()));
-						} else {
-							if (TimeUntilStart.start == false)
-								TimeUntilStart.start((Player) e.getWhoClicked(), Main.inv);
-							removemoney((Player) e.getWhoClicked(), Resorce.pariubani.get(e.getWhoClicked()));
-							intentionalbet.add((Player) e.getWhoClicked());
-							e.getWhoClicked().openInventory(Main.inv);
-						}
+						if (TimeUntilStart.start == false)
+							TimeUntilStart.start(p, Main.inv);
+						removemoney(p, Resorce.pariubani.get(p));
+						intentionalbet.add(p);
+						p.openInventory(Main.inv);
 					}
-
-					e.setCancelled(true);
-					return;
-				}
-				if (e.getCurrentItem().equals(Resorce.cancel_item())) {
-					if (Resorce.separate_roulette())
-						e.getWhoClicked().openInventory(BetOpen.invs.get(e.getWhoClicked()));
-					else
-						e.getWhoClicked().openInventory(Main.inv);
-					Resorce.pariubani.remove(e.getWhoClicked());
-					Resorce.pariu.remove(e.getWhoClicked());
-					e.setCancelled(true);
-					return;
-				}
-
-				Player p = (Player) e.getWhoClicked();
-				int bani = money(e.getSlot());
-				if (Resorce.pariubani.keySet().contains(p) == false)
-					Resorce.pariubani.put(p, 0);
-				int sumapariu = Resorce.pariubani.get(p);
-				if (e.getSlot() >= 10 && e.getSlot() <= 16) {
-					sumapariu += bani;
-					if (sumapariu > getmoney(p))
-						sumapariu = (int) getmoney(p);
-					p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
-				}
-				if (e.getSlot() >= 19 && e.getSlot() <= 25) {
-					if (sumapariu == 0) {
-						p.sendMessage(Resorce.make_less_zero());
-						e.setCancelled(true);
-						return;
-					}
-					sumapariu -= bani;
-					if (sumapariu < 0)
-						sumapariu = 0;
-					p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
-				}
-
-				int color = Resorce.pariu.get(p);
-				if (color == 1) {
-					Resorce.blackpariu -= Resorce.pariubani.get(p);
-					changebuton(1, Resorce.blackpariu, p);
-				}
-				if (color == 2) {
-					Resorce.redpariu -= Resorce.pariubani.get(p);
-					changebuton(2, Resorce.redpariu, p);
-				}
-				if (color == 3) {
-					Resorce.greenpariu -= Resorce.pariubani.get(p);
-					changebuton(3, Resorce.greenpariu, p);
-				}
-
-				Resorce.pariubani.replace(p, sumapariu);
-
-				if (color == 1) {
-					Resorce.blackpariu += Resorce.pariubani.get(p);
-					changebuton(1, Resorce.blackpariu, p);
-				}
-				if (color == 2) {
-					Resorce.redpariu += Resorce.pariubani.get(p);
-					changebuton(2, Resorce.redpariu, p);
-				}
-				if (color == 3) {
-					Resorce.greenpariu += Resorce.pariubani.get(p);
-					changebuton(3, Resorce.greenpariu, p);
 				}
 
 				e.setCancelled(true);
+				return;
 			}
+			// Cancel Button
+			if (item.equals(Resorce.cancel_item())) {
+				if (Resorce.separate_roulette())
+					p.openInventory(BetOpen.invs.get(e.getWhoClicked()));
+				else
+					p.openInventory(Main.inv);
+				Resorce.pariubani.remove(p);
+				Resorce.pariu.remove(p);
+				e.setCancelled(true);
+				return;
+			}
+			
+			int bani = money(e.getSlot());
+			if (Resorce.pariubani.keySet().contains(p) == false)
+				Resorce.pariubani.put(p, 0);
+			int sumapariu = Resorce.pariubani.get(p);
+			if (e.getSlot() >= 10 && e.getSlot() <= 16) {
+				sumapariu += bani;
+				if (sumapariu > getmoney(p))
+					sumapariu = (int) getmoney(p);
+				p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
+			}
+			if (e.getSlot() >= 19 && e.getSlot() <= 25) {
+				if (sumapariu == 0) {
+					p.sendMessage(Resorce.make_less_zero());
+					e.setCancelled(true);
+					return;
+				}
+				sumapariu -= bani;
+				if (sumapariu < 0)
+					sumapariu = 0;
+				p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
+			}
+
+			int color = Resorce.pariu.get(p);
+			if (color == 1) {
+				Resorce.blackpariu -= Resorce.pariubani.get(p);
+				changebuton(1, Resorce.blackpariu, p);
+			}
+			if (color == 2) {
+				Resorce.redpariu -= Resorce.pariubani.get(p);
+				changebuton(2, Resorce.redpariu, p);
+			}
+			if (color == 3) {
+				Resorce.greenpariu -= Resorce.pariubani.get(p);
+				changebuton(3, Resorce.greenpariu, p);
+			}
+
+			Resorce.pariubani.replace(p, sumapariu);
+
+			if (color == 1) {
+				Resorce.blackpariu += Resorce.pariubani.get(p);
+				changebuton(1, Resorce.blackpariu, p);
+			}
+			if (color == 2) {
+				Resorce.redpariu += Resorce.pariubani.get(p);
+				changebuton(2, Resorce.redpariu, p);
+			}
+			if (color == 3) {
+				Resorce.greenpariu += Resorce.pariubani.get(p);
+				changebuton(3, Resorce.greenpariu, p);
+			}
+
+			e.setCancelled(true);
 		}
 	}
 

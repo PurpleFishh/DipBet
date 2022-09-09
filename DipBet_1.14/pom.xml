@@ -21,7 +21,11 @@
 			<version>1.19.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+	        <groupId>org.openjfx</groupId>
+	        <artifactId>javafx-controls</artifactId>
+	        <version>11</version>
+    	</dependency>
 		
 	</dependencies>
 
