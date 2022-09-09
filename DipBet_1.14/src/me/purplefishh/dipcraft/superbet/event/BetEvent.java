@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.purplefishh.dipcraft.superbet.main.Main;
@@ -41,11 +40,13 @@ public class BetEvent implements Listener {
 							TimeUntilStart.start(p, BetOpen.invs.get(p));
 						removemoney(p, Resorce.pariubani.get(p));
 						intentionalbet.add(p);
+						changebuton(Resorce.pariu.get(p), sumatotalculoare(p), p);
 						e.getWhoClicked().openInventory(BetOpen.invs.get(p));
 					} else {
 						if (TimeUntilStart.start == false)
 							TimeUntilStart.start(p, Main.inv);
 						removemoney(p, Resorce.pariubani.get(p));
+						changebuton(Resorce.pariu.get(p), sumatotalculoare(p), p);
 						intentionalbet.add(p);
 						p.openInventory(Main.inv);
 					}
@@ -84,52 +85,10 @@ public class BetEvent implements Listener {
 
 			p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
 
-			int color = Resorce.pariu.get(p);
-			if (color == 1) {
-				Resorce.blackpariu = Resorce.blackpariu - Resorce.pariubani.get(p) + sumapariu;
-				changebuton(1, Resorce.blackpariu, p);
-			}
-			if (color == 2) {
-				Resorce.redpariu = Resorce.redpariu - Resorce.pariubani.get(p) + sumapariu;
-				System.out.println(Resorce.redpariu);
-				changebuton(2, Resorce.redpariu, p);
-			}
-			if (color == 3) {
-				Resorce.greenpariu = Resorce.greenpariu - Resorce.pariubani.get(p) + sumapariu;
-				changebuton(3, Resorce.greenpariu, p);
-			}
-
 			Resorce.pariubani.replace(p, sumapariu);
 			e.setCancelled(true);
 		}
 
-	}
-
-	@EventHandler
-	public void exit(InventoryCloseEvent e) {
-		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.bet_inv_name()))) {
-			if (Resorce.pariubani.containsKey(e.getPlayer()) && Resorce.pariubani.get(e.getPlayer()) != 0) {
-				Player p = (Player) e.getPlayer();
-				if (!intentionalbet.contains(p)) {
-					int color = Resorce.pariu.get(p);
-					if (color == 1) {
-						Resorce.blackpariu -= Resorce.pariubani.get(p);
-						changebuton(1, Resorce.blackpariu, p);
-					}
-					if (color == 2) {
-						Resorce.redpariu -= Resorce.pariubani.get(p);
-						changebuton(2, Resorce.redpariu, p);
-					}
-					if (color == 3) {
-						Resorce.greenpariu -= Resorce.pariubani.get(p);
-						changebuton(3, Resorce.greenpariu, p);
-					}
-					Resorce.pariu.remove(e.getPlayer());
-					Resorce.pariubani.remove(e.getPlayer());
-				} else
-					intentionalbet.remove(p);
-			}
-		}
 	}
 
 	public double getmoney(Player p) {
@@ -142,7 +101,6 @@ public class BetEvent implements Listener {
 	public void removemoney(Player p, int sum) {
 		Economy eco = Main.getEconomy();
 		eco.withdrawPlayer(p, sum);
-
 	}
 
 	int money(int p) {
@@ -178,6 +136,16 @@ public class BetEvent implements Listener {
 
 		}
 		return 0;
+	}
+
+	public int sumatotalculoare(Player p) {
+		int color = Resorce.pariu.get(p), suma = 0;
+		for(Player player : Resorce.pariubani.keySet())
+			if(Resorce.pariu.get(player) == color)
+			{
+				suma += Resorce.pariubani.get(player);
+			}
+		return suma;
 	}
 
 	public static void changebuton(int cod, int suma, Player p) {

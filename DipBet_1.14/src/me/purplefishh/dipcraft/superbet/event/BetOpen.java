@@ -73,9 +73,9 @@ public class BetOpen implements Listener {
 			// This math means the positions of putting an bet items(red, green, black)
 			if (e.getSlot() == 4 * 9 + 3 - 1 || e.getSlot() == 4 * 9 + 5 - 1 || e.getSlot() == 4 * 9 + 7 - 1) {
 				if (Resorce.pariubani.containsKey(p) && Resorce.pariubani.get(p) != 0
-						&& Resorce.pariu.get(p) != code(item.getType())) {
+						&& Resorce.pariu.get(p) != code(item.getType()))
 					p.sendMessage(Resorce.already_betted());
-				} else {
+				else {
 					if (Resorce.separate_roulette()) {
 						if (Rotire.starts.containsKey(p) && Rotire.starts.get(p) == true)
 							p.sendMessage(Resorce.started_game());

@@ -19,7 +19,6 @@ public class Resorce {
 	// Lista Pariu
 	public static HashMap<Player, Integer> pariubani = new HashMap<>();
 	public static HashMap<Player, Integer> pariu = new HashMap<>();
-	public static int redpariu = 0, greenpariu = 0, blackpariu = 0;
 
 	// Config
 	static private FileConfiguration config() {

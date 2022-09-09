@@ -58,9 +58,6 @@ public class Win {
 		BetEvent.changebuton(1, 0, p);
 		BetEvent.changebuton(2, 0, p);
 		BetEvent.changebuton(3, 0, p);
-		Resorce.blackpariu = 0;
-		Resorce.redpariu = 0;
-		Resorce.greenpariu = 0;
 	}
 
 }
