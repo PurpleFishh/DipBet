@@ -1,6 +1,6 @@
 name: SuperBet
 main:  me.purplefishh.dipcraft.superbet.main.Main
-version: 1.4.2
+version: 1.4.3
 author: PurpleFishh
 api-version: 1.13
 depend: [Vault]
