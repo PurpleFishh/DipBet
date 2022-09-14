@@ -9,46 +9,39 @@ import net.milkbowl.vault.economy.Economy;
 
 public class Win {
 
-	@SuppressWarnings({ "deprecation" })
-	public static void winer(int win, Player pp) {
+	public static void winer(int win, Player separatwinner) {
 		if (Resorce.separate_roulette()) {
-			if (Resorce.pariu.get(pp) == win) {
-
-				Economy eco = Main.getEconomy();
-				if (win == 3) {
-					pp.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(pp) * Resorce.multiply_green())));
-					eco.depositPlayer(pp.getName(), Resorce.pariubani.get(pp) * Resorce.multiply_green());
-				} else if (win == 1) {
-					pp.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(pp) * Resorce.multiply_black())));
-					eco.depositPlayer(pp.getName(), Resorce.pariubani.get(pp) * Resorce.multiply_black());
-				}if(win == 2) {
-					pp.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(pp) * Resorce.multiply_red())));
-					eco.depositPlayer(pp.getName(), Resorce.pariubani.get(pp) * Resorce.multiply_red());
-				}
-
-			} else
-				pp.sendMessage(Resorce.lose());
-			delPariu(pp);
+			if (Resorce.pariu.get(separatwinner) == win)
+				giveprice(separatwinner, win);
+			else
+				separatwinner.sendMessage(Resorce.lose());
+			delPariu(separatwinner);
 		} else {
-			for (Player p : Resorce.pariu.keySet()) {
-				if (Resorce.pariu.get(p) == win) {
-
-					Economy eco = Main.getEconomy();
-					if (win == 3) {
-						p.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(p) * Resorce.multiply_green())));
-						eco.depositPlayer(p.getName(), Resorce.pariubani.get(p) * Resorce.multiply_green());
-					} if(win == 1){
-						p.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(p) * Resorce.multiply_black())));
-						eco.depositPlayer(p.getName(), Resorce.pariubani.get(p) * Resorce.multiply_black());
-					}if(win == 2) {
-						p.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(p) * Resorce.multiply_red())));
-						eco.depositPlayer(p.getName(), Resorce.pariubani.get(p) * Resorce.multiply_red());
-					}
-
+			for (Player winners : Resorce.pariu.keySet()) {
+				if (Resorce.pariu.get(winners) == win) {
+					giveprice(winners, win);
 				} else
-					p.sendMessage(Resorce.lose());
+					winners.sendMessage(Resorce.lose());
+				delPariu(winners);
 			}
-			delPariu(pp);
+		}
+	}
+
+	private static void giveprice(Player p, int win) {
+		Economy eco = Main.getEconomy();
+		switch (win) {
+			case 3:
+				p.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(p) * Resorce.multiply_green())));
+				eco.depositPlayer(p, Resorce.pariubani.get(p) * Resorce.multiply_green());
+				break;
+			case 1:
+				p.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(p) * Resorce.multiply_black())));
+				eco.depositPlayer(p, Resorce.pariubani.get(p) * Resorce.multiply_black());
+				break;
+			case 2:
+				p.sendMessage(Resorce.win(BaniInv.punct(Resorce.pariubani.get(p) * Resorce.multiply_red())));
+				eco.depositPlayer(p, Resorce.pariubani.get(p) * Resorce.multiply_red());
+				break;
 		}
 	}
 

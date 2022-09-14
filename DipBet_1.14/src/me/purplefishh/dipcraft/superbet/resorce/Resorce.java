@@ -21,11 +21,11 @@ public class Resorce {
 	public static HashMap<Player, Integer> pariu = new HashMap<>();
 
 	// Config
-	static private FileConfiguration config() {
+	private static FileConfiguration config() {
 		return Main.config();
 	}
 
-	static private FileConfiguration msg() {
+	private static FileConfiguration msg() {
 		return Main.msg();
 	}
 

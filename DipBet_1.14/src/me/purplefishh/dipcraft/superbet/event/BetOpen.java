@@ -59,8 +59,6 @@ public class BetOpen implements Listener {
 		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.main_inv_name())) && e.getCurrentItem() != null) {
 			ItemStack item = e.getCurrentItem();
 			Player p = (Player) e.getWhoClicked();
-			if (item.equals(Resorce.main_bg()) || item.equals(Resorce.line_bg()))
-				e.setCancelled(true);
 			if (item.equals(Resorce.back()))
 				p.closeInventory();
 			if (item.equals(Resorce.last_colors())) {

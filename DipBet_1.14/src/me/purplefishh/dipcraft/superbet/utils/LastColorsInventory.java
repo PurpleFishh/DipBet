@@ -1,7 +1,6 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +18,7 @@ public class LastColorsInventory implements Listener {
 		Inventory inv = Bukkit.createInventory(null, 45, Resorce.last_colors_inv_name());
 		for (int i = 0; i < 45; ++i)
 			inv.setItem(i, Resorce.main_bg());
-		for(int i = 9; i < 18; ++i)
+		for (int i = 9; i < 18; ++i)
 			inv.setItem(i, Resorce.line_bg());
 		if (Resorce.separate_roulette()) {
 			for (int i = 0; i < 9; ++i)
@@ -37,22 +36,16 @@ public class LastColorsInventory implements Listener {
 
 	@EventHandler
 	public void inv_events(InventoryClickEvent e) {
-		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.last_colors_inv_name())))
-			if (e.getCurrentItem() != null && e.getCurrentItem().getType() != Material.AIR) {
-				if (e.getCurrentItem().equals(Resorce.main_bg()) || e.getCurrentItem().equals(Resorce.line_bg()))
-					e.setCancelled(true);
-
-				if (e.getCurrentItem().equals(Resorce.cancel_item())) {
-					if (Resorce.separate_roulette())
-						e.getWhoClicked().openInventory(BetOpen.invs.get(e.getWhoClicked()));
-					else
-						e.getWhoClicked().openInventory(Main.inv);
-					Resorce.pariubani.remove(e.getWhoClicked());
-					Resorce.pariu.remove(e.getWhoClicked());
-					e.setCancelled(true);
-				}
-				e.setCancelled(true);
+		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.last_colors_inv_name()))
+				&& e.getCurrentItem() != null) {
+			if (e.getCurrentItem().equals(Resorce.cancel_item())) {
+				if (Resorce.separate_roulette())
+					e.getWhoClicked().openInventory(BetOpen.invs.get(e.getWhoClicked()));
+				else
+					e.getWhoClicked().openInventory(Main.inv);
 			}
+			e.setCancelled(true);
+		}
 	}
 
 }
