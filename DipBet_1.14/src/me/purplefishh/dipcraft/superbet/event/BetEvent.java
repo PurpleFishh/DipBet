@@ -1,8 +1,5 @@
 package me.purplefishh.dipcraft.superbet.event;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,8 +14,6 @@ import me.purplefishh.dipcraft.superbet.utils.TimeUntilStart;
 import net.milkbowl.vault.economy.Economy;
 
 public class BetEvent implements Listener {
-
-	public List<Player> intentionalbet = new ArrayList<Player>();
 
 	@EventHandler
 	public void PutMoneyEvent(InventoryClickEvent e) {
@@ -38,18 +33,14 @@ public class BetEvent implements Listener {
 					if (Resorce.separate_roulette()) {
 						if (TimeUntilStart.starts.containsKey(p) && TimeUntilStart.starts.get(p) == false)
 							TimeUntilStart.start(p, BetOpen.invs.get(p));
-						removemoney(p, Resorce.pariubani.get(p));
-						intentionalbet.add(p);
-						changebuton(Resorce.pariu.get(p), sumatotalculoare(p), p);
-						e.getWhoClicked().openInventory(BetOpen.invs.get(p));
+						p.openInventory(BetOpen.invs.get(p));
 					} else {
 						if (TimeUntilStart.start == false)
 							TimeUntilStart.start(p, Main.inv);
-						removemoney(p, Resorce.pariubani.get(p));
-						changebuton(Resorce.pariu.get(p), sumatotalculoare(p), p);
-						intentionalbet.add(p);
 						p.openInventory(Main.inv);
 					}
+					removemoney(p, Resorce.pariubani.get(p));
+					changebuton(Resorce.pariu.get(p), sumatotalculoare(p), p);
 				}
 
 				e.setCancelled(true);
@@ -140,9 +131,8 @@ public class BetEvent implements Listener {
 
 	public int sumatotalculoare(Player p) {
 		int color = Resorce.pariu.get(p), suma = 0;
-		for(Player player : Resorce.pariubani.keySet())
-			if(Resorce.pariu.get(player) == color)
-			{
+		for (Player player : Resorce.pariubani.keySet())
+			if (Resorce.pariu.get(player) == color) {
 				suma += Resorce.pariubani.get(player);
 			}
 		return suma;

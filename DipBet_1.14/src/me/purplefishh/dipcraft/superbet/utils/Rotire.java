@@ -16,15 +16,15 @@ import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 
 public class Rotire {
 
-	static long t;
-	static List<Integer> v = new ArrayList<>();
+	private static long t;
+
 	public static boolean start = false;
 	public static HashMap<Player, Boolean> starts = new HashMap<>();
 
 	public static List<Integer> last = new ArrayList<>();
 	public static HashMap<Player, List<Integer>> last_separate = new HashMap<>();
 
-	static int rotiri() {
+	private static int rotiri() {
 		Random rand = new Random();
 		int ra = rand.nextInt(40);
 
@@ -34,30 +34,26 @@ public class Rotire {
 	}
 
 	public static void InvRotire(final Inventory inv, final Player p) {
-		if (Resorce.separate_roulette())
+		if (Resorce.separate_roulette()) {
 			starts.put(p, true);
-		else
-			start = true;
-		if (Resorce.separate_roulette())
 			TimeUntilStart.starts.replace(p, false);
-		else
+
+		} else {
+			start = true;
 			TimeUntilStart.start = false;
+		}
+
+		List<Integer> displayedcolors = new ArrayList<Integer>();
 		int color = ColorUtils.colorgive();
-		while (color == 3)
-			color = ColorUtils.colorgive();
 		for (int i = 0; i <= 8; ++i) {
-			if (ColorUtils.colorgive() == 3 && !v.contains(3))
-				v.add(i, 3);
+			if (ColorUtils.colorgive() == 3 && !displayedcolors.contains(3))
+				displayedcolors.add(3);
 			else
-				v.add(i, color);
-			inv.setItem(9 + i, it(v.get(i)));
-			if (color == 2)
-				color = 1;
-			else if (color == 1)
-				color = 2;
+				displayedcolors.add(color);
+			inv.setItem(9 + i, it(displayedcolors.get(i)));
+			color = (color == 2) ? 1 : 2;
 		}
 		t = 7L;
-
 		new BukkitRunnable() {
 			int rot = rotiri();
 			int k = 0, n = 0;
@@ -65,51 +61,34 @@ public class Rotire {
 			@Override
 			public void run() {
 				if (n == rot) {
-					Win.winer(v.get(4), p);
+					Win.winer(displayedcolors.get(4), p);
 
 					if (Resorce.separate_roulette()) {
 						starts.replace(p, false);
-						List<Integer> last = new ArrayList<>();
 						if (!last_separate.containsKey(p)) {
-							last_list_maker(last, v.get(4));
+							List<Integer> last = new ArrayList<>();
+							last_list_maker(last, displayedcolors.get(4));
 							last_separate.put(p, last);
 						} else {
-							last = last_separate.get(p);
-							last_list_maker(last, v.get(4));
+							last_list_maker(last_separate.get(p), displayedcolors.get(4));
 						}
 					} else {
 						start = false;
-						last_list_maker(last, v.get(4));
+						last_list_maker(last, displayedcolors.get(4));
 					}
 					inv.setItem(36, Resorce.status_block());
 					this.cancel();
 				}
 				if (k >= t) {
-					for (int i = 0; i < 8; ++i)
-						v.set(i, v.get(i + 1));
-
-					int color = v.get(7);
-					int x = 6;
-					while (color == 3) {
-						color = v.get(x);
-						x--;
-						if (x == 0) {
-							color = ColorUtils.colorgive();
-							return;
-						}
-					}
-					if (color == 2)
-						color = 1;
-					else if (color == 1)
-						color = 2;
-					if (ColorUtils.colorgive() == 3 && !v.contains(3))
-						v.set(8, 3);
+					displayedcolors.remove(0);
+					if (ColorUtils.colorgive() == 3 && !displayedcolors.contains(3))
+						displayedcolors.add(3);
 					else
-						v.set(8, color);
+						displayedcolors.add(displayedcolors.get(7) == 2 ? 1 : 2);
 
 					n++;
 					for (int i = 0; i <= 8; ++i) {
-						inv.setItem(9 + i, it(v.get(i)));
+						inv.setItem(9 + i, it(displayedcolors.get(i)));
 					}
 					if (n >= 35)
 						t = k + 7L * (n - 33);
@@ -134,16 +113,15 @@ public class Rotire {
 
 		case 3:
 			return Resorce.Verde();
-
 		}
 		return null;
 	}
-	private static List<Integer> last_list_maker(List<Integer> list, int color)
-	{
-		if(list.size() == 9)
+
+	private static List<Integer> last_list_maker(List<Integer> list, int color) {
+		if (list.size() == 9)
 			list.remove(0);
 		list.add(color);
 		return list;
 	}
-	
+
 }

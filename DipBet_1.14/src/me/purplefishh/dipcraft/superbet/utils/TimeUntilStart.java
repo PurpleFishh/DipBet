@@ -13,7 +13,7 @@ import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 public class TimeUntilStart {
 
 	public static boolean start = false;
-	public static HashMap<Player, Boolean> starts = new HashMap<>();
+	public static HashMap<Player, Boolean> starts = new HashMap<Player, Boolean>();
 
 	public static void start(final Player p, final Inventory inv) {
 		if (Resorce.separate_roulette())
