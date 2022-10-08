@@ -148,6 +148,9 @@ public class Resorce {
 	public static boolean sound_effects() {
 		return config().getBoolean("sound_effects");
 	}
+	public static boolean fireworks() {
+		return config().getBoolean("fireworks");
+	}
 	
 	public static int bet_amount(int i) {
 		return config().getInt("bet" + i);

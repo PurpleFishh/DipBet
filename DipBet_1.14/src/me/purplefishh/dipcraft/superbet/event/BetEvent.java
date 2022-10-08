@@ -26,6 +26,12 @@ public class BetEvent implements Listener {
 		if (e.getView().getTitle().equals(Repleace.repleace(Resorce.bet_inv_name())) && e.getCurrentItem() != null) {
 			ItemStack item = e.getCurrentItem();
 			Player p = (Player) e.getWhoClicked();
+			// Cancel the event for clicking the bg items
+			if(item.equals(Resorce.main_bg()) || item.equals(Resorce.line_bg()))
+			{
+				e.setCancelled(true);
+				return;
+			}
 			// The finish button
 			if (item.equals(Resorce.put_item())) {
 				// Verify if he wants to bet when his amount = 0
