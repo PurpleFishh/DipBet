@@ -34,6 +34,9 @@ multiply_black: 2
 multiply_red: 2
 multiply_green: 14
 
+# Sound effects
+sound_effects: true
+
 # Please use the text name of the items not id number, if you get an error please firstly verify the items id
 # Example: LIME_STAINED_GLASS(vers>1.13), STAINED_GLASS:5(vers<1.13)
 # -Betting Item

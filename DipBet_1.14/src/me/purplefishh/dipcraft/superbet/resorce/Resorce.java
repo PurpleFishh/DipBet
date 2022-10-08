@@ -145,7 +145,10 @@ public class Resorce {
 	public static boolean delete_after_bet() {
 		return config().getBoolean("delete_after_bet");
 	}
-
+	public static boolean sound_effects() {
+		return config().getBoolean("sound_effects");
+	}
+	
 	public static int bet_amount(int i) {
 		return config().getInt("bet" + i);
 	}

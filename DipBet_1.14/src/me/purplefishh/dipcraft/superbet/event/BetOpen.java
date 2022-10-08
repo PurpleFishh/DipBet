@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -74,6 +75,8 @@ public class BetOpen implements Listener {
 						&& Resorce.pariu.get(p) != code(item.getType()))
 					p.sendMessage(Resorce.already_betted());
 				else {
+					if (Resorce.sound_effects())
+						p.playSound(p, Sound.BLOCK_NOTE_BLOCK_XYLOPHONE, 100, 1);
 					if (Resorce.separate_roulette()) {
 						if (Rotire.starts.containsKey(p) && Rotire.starts.get(p) == true)
 							p.sendMessage(Resorce.started_game());

@@ -2,6 +2,7 @@ package me.purplefishh.dipcraft.superbet.utils;
 
 import java.util.HashMap;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -59,7 +60,8 @@ public class TimeUntilStart {
 						p.sendMessage(timecalulate(t));
 					else
 						msgsend(timecalulate(t));
-
+					if(Resorce.sound_effects())
+						Rotire.playsound(p, Sound.BLOCK_NOTE_BLOCK_PLING, 1);
 				}
 				t--;
 			}

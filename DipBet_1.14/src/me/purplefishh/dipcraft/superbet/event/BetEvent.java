@@ -3,6 +3,7 @@ package me.purplefishh.dipcraft.superbet.event;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -48,6 +49,8 @@ public class BetEvent implements Listener {
 						intentionalbet.add(p);
 						p.openInventory(Main.inv);
 					}
+					if (Resorce.sound_effects())
+						p.playSound(p, Sound.BLOCK_NOTE_BLOCK_HARP, 100, 1);
 				}
 
 				e.setCancelled(true);
@@ -82,6 +85,12 @@ public class BetEvent implements Listener {
 				sumapariu = (int) getmoney(p);
 
 			p.sendMessage(Resorce.money_select(BaniInv.punct(sumapariu)));
+			// Playing sound effects
+			if (Resorce.sound_effects())
+				if (e.getSlot() <= 16)
+					p.playSound(p, Sound.BLOCK_NOTE_BLOCK_BELL, 100, (float) 1.3);
+				else
+					p.playSound(p, Sound.BLOCK_NOTE_BLOCK_BELL, 100, (float) 0.1);
 
 			Resorce.pariubani.replace(p, sumapariu);
 			e.setCancelled(true);
@@ -138,9 +147,8 @@ public class BetEvent implements Listener {
 
 	public int sumatotalculoare(Player p) {
 		int color = Resorce.pariu.get(p), suma = 0;
-		for(Player player : Resorce.pariubani.keySet())
-			if(Resorce.pariu.get(player) == color)
-			{
+		for (Player player : Resorce.pariubani.keySet())
+			if (Resorce.pariu.get(player) == color) {
 				suma += Resorce.pariubani.get(player);
 			}
 		return suma;

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -56,8 +57,10 @@ public class Rotire {
 			else if (color == 1)
 				color = 2;
 		}
-		t = 7L;
+		if (Resorce.sound_effects())
+			playsound(p, Sound.BLOCK_CHEST_OPEN, 1);
 
+		t = 7L;
 		new BukkitRunnable() {
 			int rot = rotiri();
 			int k = 0, n = 0;
@@ -111,6 +114,12 @@ public class Rotire {
 					for (int i = 0; i <= 8; ++i) {
 						inv.setItem(9 + i, it(v.get(i)));
 					}
+
+					// p.playSound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 100, 1);
+					// playsound(p, Sound.UI_BUTTON_CLICK, 10);
+					if (Resorce.sound_effects())
+						playsound(p, Sound.BLOCK_NOTE_BLOCK_SNARE, 1);
+
 					if (n >= 35)
 						t = k + 7L * (n - 33);
 					else if (n >= 30)
@@ -119,7 +128,11 @@ public class Rotire {
 						t = k + 7L;
 				}
 				k += 7;
+				// playsound(p, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 3);
+				if (Resorce.sound_effects())
+					playsound(p, Sound.BLOCK_NOTE_BLOCK_BASS, 1);
 			}
+
 		}.runTaskTimer(Main.plugin(), 7L, 7L);
 
 	}
@@ -138,12 +151,20 @@ public class Rotire {
 		}
 		return null;
 	}
-	private static List<Integer> last_list_maker(List<Integer> list, int color)
-	{
-		if(list.size() == 9)
+
+	private static List<Integer> last_list_maker(List<Integer> list, int color) {
+		if (list.size() == 9)
 			list.remove(0);
 		list.add(color);
 		return list;
 	}
-	
+
+	public static void playsound(Player p, Sound sound, float pitch) {
+		if (Resorce.separate_roulette()) {
+			p.playSound(p, sound, 100, pitch);
+		} else {
+			for (Player pp : Resorce.pariu.keySet())
+				pp.playSound(pp, sound, 100, pitch);
+		}
+	}
 }
