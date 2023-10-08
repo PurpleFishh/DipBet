@@ -1,8 +1,11 @@
 package me.purplefishh.dipcraft.superbet.event;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import me.purplefishh.dipcraft.superbet.Main;
+import me.purplefishh.dipcraft.superbet.resorce.Repleace;
+import me.purplefishh.dipcraft.superbet.resorce.Resorce;
+import me.purplefishh.dipcraft.superbet.utils.BaniInv;
+import me.purplefishh.dipcraft.superbet.utils.TimeUntilStart;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,12 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import me.purplefishh.dipcraft.superbet.main.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Repleace;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
-import me.purplefishh.dipcraft.superbet.utils.BaniInv;
-import me.purplefishh.dipcraft.superbet.utils.TimeUntilStart;
-import net.milkbowl.vault.economy.Economy;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BetEvent implements Listener {
 

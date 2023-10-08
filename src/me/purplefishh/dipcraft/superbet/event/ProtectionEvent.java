@@ -1,5 +1,6 @@
 package me.purplefishh.dipcraft.superbet.event;
 
+import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,8 +11,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.InventoryView;
-
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 
 public class ProtectionEvent implements Listener {
 

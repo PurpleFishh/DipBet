@@ -1,15 +1,14 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
-import java.util.HashMap;
-
+import me.purplefishh.dipcraft.superbet.event.BetOpen;
+import me.purplefishh.dipcraft.superbet.Main;
+import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.purplefishh.dipcraft.superbet.event.BetOpen;
-import me.purplefishh.dipcraft.superbet.main.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
+import java.util.HashMap;
 
 public class TimeUntilStart {
 

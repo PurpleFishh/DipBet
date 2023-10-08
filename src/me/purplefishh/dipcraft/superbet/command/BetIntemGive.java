@@ -1,5 +1,10 @@
 package me.purplefishh.dipcraft.superbet.command;
 
+import me.purplefishh.dipcraft.superbet.event.BetOpen;
+import me.purplefishh.dipcraft.superbet.Main;
+import me.purplefishh.dipcraft.superbet.resorce.ColorUtils;
+import me.purplefishh.dipcraft.superbet.resorce.Repleace;
+import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -7,12 +12,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-
-import me.purplefishh.dipcraft.superbet.event.BetOpen;
-import me.purplefishh.dipcraft.superbet.main.Main;
-import me.purplefishh.dipcraft.superbet.resorce.ColorUtils;
-import me.purplefishh.dipcraft.superbet.resorce.Repleace;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 
 public class BetIntemGive implements CommandExecutor {
 

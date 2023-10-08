@@ -1,12 +1,11 @@
 package me.purplefishh.dipcraft.superbet.resorce;
 
-import java.util.Random;
-
+import me.purplefishh.dipcraft.superbet.Main;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import me.purplefishh.dipcraft.superbet.main.Main;
+import java.util.Random;
 
 public class ColorUtils {
 

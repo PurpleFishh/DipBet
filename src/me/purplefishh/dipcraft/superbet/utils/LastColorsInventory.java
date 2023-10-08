@@ -1,16 +1,15 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
+import me.purplefishh.dipcraft.superbet.event.BetOpen;
+import me.purplefishh.dipcraft.superbet.Main;
+import me.purplefishh.dipcraft.superbet.resorce.Repleace;
+import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-
-import me.purplefishh.dipcraft.superbet.event.BetOpen;
-import me.purplefishh.dipcraft.superbet.main.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Repleace;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
 
 public class LastColorsInventory implements Listener {
 

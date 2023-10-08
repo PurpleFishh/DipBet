@@ -1,5 +1,5 @@
 name: SuperBet
-main:  me.purplefishh.dipcraft.superbet.main.Main
+main:  me.purplefishh.dipcraft.superbet.Main
 version: 1.4.4
 author: PurpleFishh
 api-version: 1.13

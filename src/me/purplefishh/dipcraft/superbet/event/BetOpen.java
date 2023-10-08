@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import me.purplefishh.dipcraft.superbet.main.Main;
+import me.purplefishh.dipcraft.superbet.Main;
 import me.purplefishh.dipcraft.superbet.resorce.ColorUtils;
 import me.purplefishh.dipcraft.superbet.resorce.Repleace;
 import me.purplefishh.dipcraft.superbet.resorce.Resorce;

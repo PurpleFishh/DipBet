@@ -1,5 +1,9 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
+import me.purplefishh.dipcraft.superbet.event.BetEvent;
+import me.purplefishh.dipcraft.superbet.Main;
+import me.purplefishh.dipcraft.superbet.resorce.Resorce;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
@@ -10,11 +14,6 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.metadata.FixedMetadataValue;
-
-import me.purplefishh.dipcraft.superbet.event.BetEvent;
-import me.purplefishh.dipcraft.superbet.main.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
-import net.milkbowl.vault.economy.Economy;
 
 public class Win {
 
