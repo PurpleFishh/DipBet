@@ -1,6 +1,7 @@
-package me.purplefishh.dipcraft.superbet;
+package me.purplefishh.dipcraft.superbet.helpers;
 
 import lombok.Getter;
+import me.purplefishh.dipcraft.superbet.Main;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -48,7 +49,7 @@ public class ConfigHelper {
         if (!Main.getInstance().isLegacy()) {
             {
                 Main.getInstance().saveDefaultConfig();
-                config = getConfig();
+                config = Main.getInstance().getConfig();
             }
         } else {
             fileLegacy = new File(Main.getInstance().getDataFolder(), "config_legacy.yml");

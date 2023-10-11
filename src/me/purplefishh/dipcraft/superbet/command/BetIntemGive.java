@@ -1,24 +1,20 @@
 package me.purplefishh.dipcraft.superbet.command;
 
-import me.purplefishh.dipcraft.superbet.event.BetOpen;
 import me.purplefishh.dipcraft.superbet.Main;
-import me.purplefishh.dipcraft.superbet.resorce.ColorUtils;
-import me.purplefishh.dipcraft.superbet.resorce.Repleace;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+
+import java.util.Arrays;
 
 public class BetIntemGive implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		// Commands for players and console
-		if (args.length >= 1) {
+		Main.getInstance().getCommandGroup().execute(sender, args);
+		return true;
+        /*if (args.length >= 1) {
 			if (args[0].equalsIgnoreCase("reload")) {
 				if (sender.hasPermission("superbet.command.reload")) {
 					Main.reloadConf();
@@ -143,5 +139,6 @@ public class BetIntemGive implements CommandExecutor {
 			p.sendMessage(Resorce.helpbetreload());
 		if (p.hasPermission("superbet.command.help"))
 			p.sendMessage(Resorce.helpcomm());
+	}*/
 	}
 }

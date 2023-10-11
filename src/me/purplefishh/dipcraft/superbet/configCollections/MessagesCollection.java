@@ -1,12 +1,11 @@
-package me.purplefishh.dipcraft.superbet.resorce;
+package me.purplefishh.dipcraft.superbet.configCollections;
 
-import me.purplefishh.dipcraft.superbet.ConfigHelper;
-import org.bukkit.ChatColor;
+import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
-public class MessagesCollection {
+import static me.purplefishh.dipcraft.superbet.helpers.TextHelper.color;
+
+public class MessagesCollection implements DataStorageCollection {
 
     /**
      * The config file for messages saved in class for easier access
@@ -16,7 +15,7 @@ public class MessagesCollection {
     private static MessagesCollection instance = null;
 
     private MessagesCollection() {
-        loadConfig();
+        loadData();
     }
 
     public static MessagesCollection getInstance() {
@@ -26,19 +25,13 @@ public class MessagesCollection {
     }
 
     /**
-     * Will convert the color code from config to Minecraft colors
-     * @param s the message
-     * @return the message with converted color
-     */
-    public static String color(String s) {
-        return ChatColor.translateAlternateColorCodes('&', s);
-    }
-
-    /**
      * Message from config
      */
     public String water_mark,
             permission,
+            not_enough_args,
+            wrong_command,
+            reload_success,
             offline_player,
             send_item,
             remove_item,
@@ -49,6 +42,7 @@ public class MessagesCollection {
             make_less_zero,
             lose,
             start,
+            players_only,
             get_another_item;
 
     /**
@@ -75,7 +69,7 @@ public class MessagesCollection {
      * Load the messages form the config in every variable.
      * It can be used also for reloading the config
      */
-    public void loadConfig() {
+    public void loadData() {
         water_mark = color(msgConfig.getString("water_mark"));
 
         permission = insertWaterMark(color(msgConfig.getString("permission")));
@@ -90,6 +84,10 @@ public class MessagesCollection {
         lose = insertWaterMark(color(msgConfig.getString("lose")));
         start = insertWaterMark(color(msgConfig.getString("start")));
         get_another_item = insertWaterMark(color(msgConfig.getString("get_another_item")));
+        not_enough_args = insertWaterMark(color(msgConfig.getString("not_enough_args")));
+        reload_success = insertWaterMark(color(msgConfig.getString("reload_success")));
+        wrong_command = insertWaterMark(color(msgConfig.getString("wrong_command")));
+        players_only = insertWaterMark(color(msgConfig.getString("players_only")));
 
         helpHeader = color(msgConfig.getString("helpheader"));
         helpBet = color(msgConfig.getString("helpbet"));
@@ -113,22 +111,27 @@ public class MessagesCollection {
 
     /**
      * The message for money selecting
+     *
      * @param string the amount of money selected that will replace %sum% key
      * @return the message after replacement
      */
     public String money_select(String string) {
         return money_selectRaw.replaceAll("%sum%", string);
     }
+
     /**
      * The message for winning a game
+     *
      * @param string the amount of money won that will replace %sum% key
      * @return the message after replacement
      */
     public String win(String string) {
         return winRaw.replaceAll("%sum%", string);
     }
+
     /**
      * The message of waiting for the game to start
+     *
      * @param min minutes until the start, that will replace %minutes% key
      * @param sec seconds until the start, that will replace %seconds% key
      * @return the message after replacement

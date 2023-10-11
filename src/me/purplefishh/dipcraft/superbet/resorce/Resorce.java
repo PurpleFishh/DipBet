@@ -15,18 +15,18 @@ import java.util.List;
 
 public class Resorce {
 
-	// Lista Pariu
+/*	// Lista Pariu
 	public static HashMap<Player, Integer> pariubani = new HashMap<>();
 	public static HashMap<Player, Integer> pariu = new HashMap<>();
 
 	// Config
-	private static FileConfiguration config() {
+	*//*private static FileConfiguration config() {
 		return Main.config();
 	}
 
 	private static FileConfiguration msg() {
 		return Main.msg();
-	}
+	}*//*
 
 
 	// Help
@@ -210,7 +210,7 @@ public class Resorce {
 		List<String> lorelist = (List<String>) config().getList("last_colors_lore");
 		String name = config().getString("last_colors_name");
 		return item_create(id, name, lorelist);
-	}
+	}*/
 
 
 }

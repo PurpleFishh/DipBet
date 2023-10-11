@@ -1,19 +1,10 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
-import me.purplefishh.dipcraft.superbet.event.BetOpen;
-import me.purplefishh.dipcraft.superbet.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Repleace;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 
 public class LastColorsInventory implements Listener {
 
-	public static Inventory last_colors_inventory(Player p) {
+	/*public static Inventory last_colors_inventory(Player p) {
 		Inventory inv = Bukkit.createInventory(null, 45, Resorce.last_colors_inv_name());
 		for (int i = 0; i < 45; ++i)
 			inv.setItem(i, Resorce.main_bg());
@@ -45,6 +36,6 @@ public class LastColorsInventory implements Listener {
 			}
 			e.setCancelled(true);
 		}
-	}
+	}*/
 
 }

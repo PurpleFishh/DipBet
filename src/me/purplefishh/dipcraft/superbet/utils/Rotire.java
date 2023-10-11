@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class Rotire {
 
-	static long t;
+	/*static long t;
 	static List<Integer> v = new ArrayList<>();
 	public static boolean start = false;
 	public static HashMap<Player, Boolean> starts = new HashMap<>();
@@ -165,5 +165,5 @@ public class Rotire {
 			for (Player pp : Resorce.pariu.keySet())
 				pp.playSound(pp, sound, 100, pitch);
 		}
-	}
+	}*/
 }

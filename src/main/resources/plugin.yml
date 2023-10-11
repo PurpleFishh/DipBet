@@ -4,7 +4,7 @@ version: 1.4.4
 author: PurpleFishh
 api-version: 1.13
 depend: [Vault]
-commands: 
+commands:
    bet:
-      description: Get Bet Item.
-      usage: /<command>
+      description: Betting command
+      usage: /bet [command]

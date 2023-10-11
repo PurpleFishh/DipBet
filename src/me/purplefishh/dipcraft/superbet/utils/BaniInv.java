@@ -19,7 +19,7 @@ import java.text.NumberFormat;
 
 public class BaniInv {
 
-	public static Inventory invBani() {
+	/*public static Inventory invBani() {
 		Inventory inv = Bukkit.createInventory(null, 45, Repleace.repleace(Resorce.bet_inv_name()));
 		ItemStack barieraalba = Resorce.line_bg();
 		// Fundal
@@ -58,5 +58,5 @@ public class BaniInv {
         format.setGroupingUsed(true);
 		return format.format(b);
 		
-	}
+	}*/
 }

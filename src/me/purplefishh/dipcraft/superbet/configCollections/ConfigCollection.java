@@ -1,10 +1,11 @@
-package me.purplefishh.dipcraft.superbet.resorce;
+package me.purplefishh.dipcraft.superbet.configCollections;
 
-import me.purplefishh.dipcraft.superbet.ConfigHelper;
-import org.bukkit.ChatColor;
+import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
 import org.bukkit.configuration.file.FileConfiguration;
 
-public class ConfigCollection {
+import static me.purplefishh.dipcraft.superbet.helpers.TextHelper.color;
+
+public class ConfigCollection implements DataStorageCollection {
 
     /**
      * The config file for messages saved in class for easier access
@@ -14,23 +15,13 @@ public class ConfigCollection {
     private static ConfigCollection instance = null;
 
     private ConfigCollection() {
-        loadConfig();
+        loadData();
     }
 
     public static ConfigCollection getInstance() {
         if (instance == null)
             instance = new ConfigCollection();
         return instance;
-    }
-
-    /**
-     * Will convert the color code from config to Minecraft colors
-     *
-     * @param s the message
-     * @return the message with converted color
-     */
-    public static String color(String s) {
-        return ChatColor.translateAlternateColorCodes('&', s);
     }
 
     /**
@@ -68,7 +59,7 @@ public class ConfigCollection {
      * Load the messages form the config in every variable.
      * It can be used also for reloading the config
      */
-    public void loadConfig() {
+    public void loadData() {
         separate_roulette = config.getBoolean("separate_roulette");
         delete_after_bet = config.getBoolean("delete_after_bet");
         sound_effects = config.getBoolean("sound_effects");

@@ -1,23 +1,8 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
-import me.purplefishh.dipcraft.superbet.event.BetEvent;
-import me.purplefishh.dipcraft.superbet.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
-import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.metadata.FixedMetadataValue;
-
 public class Win {
 
-	public static void winer(int win, Player separatwinner) {
+	/*public static void winer(int win, Player separatwinner) {
 		if (Resorce.separate_roulette()) {
 			if (Resorce.pariu.get(separatwinner) == win) {
 				giveprice(separatwinner, win);
@@ -90,6 +75,6 @@ public class Win {
 		fwm2.addEffect(FireworkEffect.builder().withColor(Color.AQUA).flicker(true).with(Type.BURST).build());
 		fw.setFireworkMeta(fwm2);
 
-	}
+	}*/
 
 }

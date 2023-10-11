@@ -1,18 +1,8 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
-import me.purplefishh.dipcraft.superbet.event.BetOpen;
-import me.purplefishh.dipcraft.superbet.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.HashMap;
-
 public class TimeUntilStart {
 
-	public static boolean start = false;
+	/*public static boolean start = false;
 	public static HashMap<Player, Boolean> starts = new HashMap<>();
 
 	public static void start(final Player p, final Inventory inv) {
@@ -80,5 +70,5 @@ public class TimeUntilStart {
 		if (time % 60 != 0)
 			sec = time - min * 60;
 		return Resorce.start_in_time(min, sec);
-	}
+	}*/
 }

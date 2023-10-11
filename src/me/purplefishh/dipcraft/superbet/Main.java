@@ -1,30 +1,23 @@
 package me.purplefishh.dipcraft.superbet;
 
 import lombok.Getter;
-import me.purplefishh.dipcraft.superbet.command.BetIntemGive;
-import me.purplefishh.dipcraft.superbet.event.BetEvent;
-import me.purplefishh.dipcraft.superbet.event.BetOpen;
-import me.purplefishh.dipcraft.superbet.event.ProtectionEvent;
-import me.purplefishh.dipcraft.superbet.resorce.ColorUtils;
-import me.purplefishh.dipcraft.superbet.resorce.Repleace;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
+import me.purplefishh.dipcraft.superbet.command.*;
+import me.purplefishh.dipcraft.superbet.configCollections.ConfigCollection;
+import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
 import me.purplefishh.dipcraft.superbet.utils.LastColorsInventory;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 public class Main extends JavaPlugin {
 
+    @Getter
     private static Main instance = null;
-    private Main() {
-    }
-    public static Main getInstance() {
-        if (instance == null)
-            instance = new Main();
-        return instance;
-    }
 
     private final String version = Bukkit.getVersion().split("\\(MC: ")[1].split("\\)")[0];
     @Getter
@@ -34,6 +27,9 @@ public class Main extends JavaPlugin {
     @Getter
     private Economy econ = null;
 
+    @Getter
+    private CommandGroup commandGroup;
+
     @Override
     public void onEnable() {
         System.out.println("[SuperBet] Enable!");
@@ -42,12 +38,9 @@ public class Main extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+        instance = this;
         commands();
         events();
-        if (!Resorce.separate_roulette()) {
-            inv = Bukkit.createInventory(null, 45, Repleace.repleace(Resorce.main_inv_name()));
-            ColorUtils.colorinv(inv);
-        }
     }
 
     private boolean setupEconomy() {
@@ -66,14 +59,32 @@ public class Main extends JavaPlugin {
     }
 
     private void commands() {
-        this.getCommand("bet").setExecutor(new BetIntemGive());
+        commandGroup = new CommandGroup("bet",
+                new BetGiveItemCommand(),
+                new ReloadCommand(),
+                new BetInventoryOpenCommand(),
+                new BetRemoveItemCommand(),
+                new HelpCommand());
+    }
+
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        commandGroup.execute(sender, args);
+        return true;
     }
 
     private void events() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new BetOpen(), this);
+        /*pluginManager.registerEvents(new BetOpen(), this);
         pluginManager.registerEvents(new BetEvent(), this);
-        pluginManager.registerEvents(new ProtectionEvent(), this);
+        pluginManager.registerEvents(new ProtectionEvent(), this);*/
         pluginManager.registerEvents(new LastColorsInventory(), this);
+    }
+
+    public void reload() {
+        ConfigHelper.getInstance().reloadConfig();
+        //TODO: Fa o lista din configuri folosind DataStorageCollection si da la toate loadData prin for
+        ConfigCollection.getInstance().loadData();
+        ConfigCollection.getInstance().loadData();
     }
 }
