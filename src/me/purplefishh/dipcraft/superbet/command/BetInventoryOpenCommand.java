@@ -20,6 +20,6 @@ public class BetInventoryOpenCommand implements ICommand{
 
     @Override
     public String getLabel() {
-        return "";
+        return "inventory";
     }
 }

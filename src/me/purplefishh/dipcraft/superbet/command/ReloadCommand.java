@@ -3,6 +3,9 @@ package me.purplefishh.dipcraft.superbet.command;
 import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;
 import org.bukkit.command.CommandSender;
 
+/**
+ * Reload the plugin configs
+ */
 public class ReloadCommand implements ICommand {
 
     @Override
@@ -23,6 +26,6 @@ public class ReloadCommand implements ICommand {
 
     @Override
     public String getUsage() {
-        return "<data>";
+        return "";
     }
 }

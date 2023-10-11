@@ -18,7 +18,6 @@ public class ItemHelper {
     public static ItemStack replacePlaceHolders(ItemStack item, Pair<String, Object>... keyReplacement) {
         if (!item.hasItemMeta())
             return item;
-
         ItemMeta meta = item.getItemMeta();
         if (meta.hasDisplayName()) {
             String name = meta.getDisplayName();
@@ -28,8 +27,9 @@ public class ItemHelper {
         }
         if (meta.hasLore()) {
             List<String> lore = meta.getLore();
-            for (Pair<String, Object> pair : keyReplacement)
-                lore.forEach(line -> line.replaceAll(pair.getKey(), pair.getValue().toString()));
+            for (Pair<String, Object> pair : keyReplacement) {
+                lore = lore.stream().map(line -> line.replaceAll(pair.getKey(), pair.getValue().toString())).toList();
+            }
             meta.setLore(lore);
         }
         item.setItemMeta(meta);

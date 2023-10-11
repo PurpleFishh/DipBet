@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BetEvent implements Listener {
 
-	public List<Player> intentionalbet = new ArrayList<Player>();
+	/*public List<Player> intentionalbet = new ArrayList<Player>();
 
 	@EventHandler
 	public void PutMoneyEvent(InventoryClickEvent e) {
@@ -175,6 +175,6 @@ public class BetEvent implements Listener {
 			if (cod == 3)
 				BetOpen.invs.get(p).setItem(4 * 9 + 4, Resorce.green_button(suma));
 		}
-	}
+	}*/
 
 }

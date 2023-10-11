@@ -1,14 +1,13 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@AllArgsConstructor
-public class Tuple<L, C, R> {
-    @Getter
-    private final L left;
-    @Getter
-    private final C center;
-    @Getter
-    private final R right;
+/**
+ * Tuple data structure for storing 3 data at the same time
+ * @param left the left element of the tuple
+ * @param center the center element of the tuple
+ * @param right the right element of the tuple
+ * @param <L> the left element type
+ * @param <C> the center element type
+ * @param <R> the right element type
+ */
+public record Tuple<L, C, R>(L left, C center, R right) {
 }

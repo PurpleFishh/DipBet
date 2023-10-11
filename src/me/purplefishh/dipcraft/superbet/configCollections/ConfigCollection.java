@@ -35,7 +35,7 @@ public class ConfigCollection implements DataStorageCollection {
      * The betting amounts available <br>
      * An array of 7 values
      */
-    public int[] bettingAmounts = new int[7];
+    public int[] bettingAmounts = new int[8];
 
     /**
      * Conditions
@@ -72,7 +72,7 @@ public class ConfigCollection implements DataStorageCollection {
 
         main_inv_name = color(config.getString("main_inv_name"));
         bet_inv_name = color(config.getString("bet_inv_name"));
-        last_colors_inv_name = color(config.getString("last_colors_name"));
+        last_colors_inv_name = color(config.getString("last_colors_inv_name"));
         increase_amount_color = config.getString("increase_amount_color");
         decrease_amount_color = config.getString("decrease_amount_color");
 

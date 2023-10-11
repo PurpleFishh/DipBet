@@ -14,7 +14,7 @@ import org.bukkit.inventory.InventoryView;
 
 public class ProtectionEvent implements Listener {
 
-	@EventHandler
+	/*@EventHandler
 	public void noCraft(CraftItemEvent e) {
 		if (e.getView().getTopInventory().contains(Resorce.BetItem())) {
 			e.setCancelled(true);
@@ -50,6 +50,6 @@ public class ProtectionEvent implements Listener {
 		        e.setCancelled(true);
 		    }
 		}
-	}
+	}*/
 
 }

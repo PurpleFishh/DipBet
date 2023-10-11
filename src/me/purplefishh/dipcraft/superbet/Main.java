@@ -3,6 +3,10 @@ package me.purplefishh.dipcraft.superbet;
 import lombok.Getter;
 import me.purplefishh.dipcraft.superbet.command.*;
 import me.purplefishh.dipcraft.superbet.configCollections.ConfigCollection;
+import me.purplefishh.dipcraft.superbet.configCollections.ItemsCollection;
+import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;
+import me.purplefishh.dipcraft.superbet.event.InteractWithItemEvent;
+import me.purplefishh.dipcraft.superbet.game.Game;
 import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
 import me.purplefishh.dipcraft.superbet.utils.LastColorsInventory;
 import net.milkbowl.vault.economy.Economy;
@@ -26,7 +30,8 @@ public class Main extends JavaPlugin {
             version.contains("1.14") || version.contains("1.13"));
     @Getter
     private Economy econ = null;
-
+    @Getter
+    private Game game;
     @Getter
     private CommandGroup commandGroup;
 
@@ -41,6 +46,7 @@ public class Main extends JavaPlugin {
         instance = this;
         commands();
         events();
+        game = new Game();
     }
 
     private boolean setupEconomy() {
@@ -78,13 +84,14 @@ public class Main extends JavaPlugin {
         /*pluginManager.registerEvents(new BetOpen(), this);
         pluginManager.registerEvents(new BetEvent(), this);
         pluginManager.registerEvents(new ProtectionEvent(), this);*/
-        pluginManager.registerEvents(new LastColorsInventory(), this);
+        pluginManager.registerEvents(new InteractWithItemEvent(), this);
     }
 
     public void reload() {
         ConfigHelper.getInstance().reloadConfig();
         //TODO: Fa o lista din configuri folosind DataStorageCollection si da la toate loadData prin for
         ConfigCollection.getInstance().loadData();
-        ConfigCollection.getInstance().loadData();
+        MessagesCollection.getInstance().loadData();
+        ItemsCollection.getInstance().loadData();
     }
 }

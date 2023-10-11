@@ -24,7 +24,7 @@ import me.purplefishh.dipcraft.superbet.utils.Rotire;
 
 public class BetOpen implements Listener {
 
-	public static HashMap<Player, Inventory> invs = new HashMap<Player, Inventory>();
+	/*public static HashMap<Player, Inventory> invs = new HashMap<Player, Inventory>();
 
 	// Event for opening main inventory for betting
 	@EventHandler
@@ -107,5 +107,5 @@ public class BetOpen implements Listener {
 		if (Resorce.green_button(0).getType() == data)
 			return 3;
 		return -1;
-	}
+	}*/
 }

@@ -7,6 +7,9 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
 
+/**
+ * Give the betting item to a player
+ */
 public class BetIntemGive implements CommandExecutor {
 
 	@Override
