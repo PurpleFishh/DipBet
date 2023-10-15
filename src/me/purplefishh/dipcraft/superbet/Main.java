@@ -6,17 +6,25 @@ import me.purplefishh.dipcraft.superbet.configCollections.ConfigCollection;
 import me.purplefishh.dipcraft.superbet.configCollections.ItemsCollection;
 import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;
 import me.purplefishh.dipcraft.superbet.event.InteractWithItemEvent;
-import me.purplefishh.dipcraft.superbet.game.Game;
+import me.purplefishh.dipcraft.superbet.event.InteractWithMainInvEvent;
+import me.purplefishh.dipcraft.superbet.event.InteractWithPlaceBettingInvEvent;
+import me.purplefishh.dipcraft.superbet.event.ProtectionEvent;
+import me.purplefishh.dipcraft.superbet.game.GameSingle;
+import me.purplefishh.dipcraft.superbet.game.IGame;
+import me.purplefishh.dipcraft.superbet.handel.ExitItemPress;
+import me.purplefishh.dipcraft.superbet.handel.InventoryClose;
 import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
-import me.purplefishh.dipcraft.superbet.utils.LastColorsInventory;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 public class Main extends JavaPlugin {
 
@@ -31,7 +39,8 @@ public class Main extends JavaPlugin {
     @Getter
     private Economy econ = null;
     @Getter
-    private Game game;
+    private IGame game;
+    private HashMap<Player, IGame> separatedGames;
     @Getter
     private CommandGroup commandGroup;
 
@@ -46,7 +55,10 @@ public class Main extends JavaPlugin {
         instance = this;
         commands();
         events();
-        game = new Game();
+        if (ConfigCollection.getInstance().separate_roulette) {
+            separatedGames = new HashMap<>();
+        } else
+            game = new GameSingle();
     }
 
     private boolean setupEconomy() {
@@ -81,10 +93,13 @@ public class Main extends JavaPlugin {
 
     private void events() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        /*pluginManager.registerEvents(new BetOpen(), this);
-        pluginManager.registerEvents(new BetEvent(), this);
-        pluginManager.registerEvents(new ProtectionEvent(), this);*/
+
+        pluginManager.registerEvents(new ProtectionEvent(), this);
         pluginManager.registerEvents(new InteractWithItemEvent(), this);
+        pluginManager.registerEvents(new InteractWithMainInvEvent(), this);
+        pluginManager.registerEvents(new InteractWithPlaceBettingInvEvent(), this);
+        pluginManager.registerEvents(new ExitItemPress(), this);
+        pluginManager.registerEvents(new InventoryClose(), this);
     }
 
     public void reload() {
@@ -94,4 +109,11 @@ public class Main extends JavaPlugin {
         MessagesCollection.getInstance().loadData();
         ItemsCollection.getInstance().loadData();
     }
+
+//    public IGame getGame(Player player)
+//    {
+//        if(ConfigCollection.getInstance().separate_roulette)
+//            return separatedGames.get(player);
+//        return game;
+//    }
 }

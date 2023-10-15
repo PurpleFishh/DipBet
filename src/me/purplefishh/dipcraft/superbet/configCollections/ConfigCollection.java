@@ -3,6 +3,8 @@ package me.purplefishh.dipcraft.superbet.configCollections;
 import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.util.ArrayList;
+
 import static me.purplefishh.dipcraft.superbet.helpers.TextHelper.color;
 
 public class ConfigCollection implements DataStorageCollection {
@@ -35,7 +37,7 @@ public class ConfigCollection implements DataStorageCollection {
      * The betting amounts available <br>
      * An array of 7 values
      */
-    public int[] bettingAmounts = new int[8];
+    public int[] bettingAmounts = new int[7];
 
     /**
      * Conditions
@@ -54,6 +56,10 @@ public class ConfigCollection implements DataStorageCollection {
             decrease_amount_color,
             last_colors_inv_name;
 
+    /**
+     * A collection with the name of all inventories
+     */
+    public ArrayList<String> inventoriesName = new ArrayList<>();
 
     /**
      * Load the messages form the config in every variable.
@@ -76,8 +82,12 @@ public class ConfigCollection implements DataStorageCollection {
         increase_amount_color = config.getString("increase_amount_color");
         decrease_amount_color = config.getString("decrease_amount_color");
 
-        for (int i = 1; i <= 7; ++i)
-            bettingAmounts[i] = getBettingAmountByIndex(i);
+        for (int i = 0; i < 7; ++i)
+            bettingAmounts[i] = getBettingAmountByIndex(i + 1);
+
+        inventoriesName.add(main_inv_name);
+        inventoriesName.add(bet_inv_name);
+        inventoriesName.add(last_colors_inv_name);
     }
 
     /**

@@ -16,9 +16,10 @@ public class ItemHelper {
      */
     @SafeVarargs
     public static ItemStack replacePlaceHolders(ItemStack item, Pair<String, Object>... keyReplacement) {
-        if (!item.hasItemMeta())
-            return item;
-        ItemMeta meta = item.getItemMeta();
+        ItemStack result = item.clone();
+        if (!result.hasItemMeta())
+            return result;
+        ItemMeta meta = result.getItemMeta();
         if (meta.hasDisplayName()) {
             String name = meta.getDisplayName();
             for (Pair<String, Object> pair : keyReplacement)
@@ -32,8 +33,8 @@ public class ItemHelper {
             }
             meta.setLore(lore);
         }
-        item.setItemMeta(meta);
-        return item;
+        result.setItemMeta(meta);
+        return result;
     }
 
     /**

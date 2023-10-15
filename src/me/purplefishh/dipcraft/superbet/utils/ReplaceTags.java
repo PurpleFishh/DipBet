@@ -10,6 +10,7 @@ public enum ReplaceTags {
     BET_AMOUNT("%bet_amount%"),
     TIME("%time%"),
     SUM("%sum%"),
+    COLOR("%color%"),
     MINUTES("%minutes%"),
     SECONDS("%seconds%");
 

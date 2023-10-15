@@ -9,12 +9,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class InteractWithItemEvent implements Listener {
 
     @EventHandler
-    public void onInteractWithItem(PlayerInteractEvent event)
-    {
-        if(event.getItem() == null && !event.getItem().equals(ItemsCollection.getInstance().betting))
+    public void onInteractWithItem(PlayerInteractEvent event) {
+        if (event.getItem() == null || !event.getItem().equals(ItemsCollection.getInstance().betting))
             return;
 
-        Main.getInstance().getGame().openBetting(event.getPlayer());
+        Main.getInstance().getGame().openMainMenu(event.getPlayer());
         event.setCancelled(true);
     }
 }

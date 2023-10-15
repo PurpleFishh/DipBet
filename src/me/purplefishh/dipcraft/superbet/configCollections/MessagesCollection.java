@@ -1,6 +1,9 @@
 package me.purplefishh.dipcraft.superbet.configCollections;
 
 import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
+import me.purplefishh.dipcraft.superbet.helpers.TextHelper;
+import me.purplefishh.dipcraft.superbet.resorce.BettingColors;
+import me.purplefishh.dipcraft.superbet.utils.ReplaceTags;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import static me.purplefishh.dipcraft.superbet.helpers.TextHelper.color;
@@ -63,7 +66,8 @@ public class MessagesCollection implements DataStorageCollection {
     private String
             money_selectRaw,
             winRaw,
-            start_in_timeRaw;
+            start_in_timeRaw,
+            bet_placed_raw;
 
     /**
      * Load the messages form the config in every variable.
@@ -100,6 +104,7 @@ public class MessagesCollection implements DataStorageCollection {
         money_selectRaw = insertWaterMark(color(msgConfig.getString("money_select")));
         winRaw = insertWaterMark(color(msgConfig.getString("win")));
         start_in_timeRaw = insertWaterMark(color(msgConfig.getString("start_in_time")));
+        bet_placed_raw = insertWaterMark(color(msgConfig.getString("bet_placed")));
     }
 
     /**
@@ -112,11 +117,24 @@ public class MessagesCollection implements DataStorageCollection {
     /**
      * The message for money selecting
      *
-     * @param string the amount of money selected that will replace %sum% key
+     * @param replace the amount of money selected that will replace %sum% key
      * @return the message after replacement
      */
-    public String money_select(String string) {
-        return money_selectRaw.replaceAll("%sum%", string);
+    public String moneySelect(Double replace) {
+        return money_selectRaw.replaceAll(ReplaceTags.SUM.getTag(), TextHelper.numberDot(replace));
+    }
+
+    /**
+     * The message after the player places a bet
+     *
+     * @param replace the amount of money placed on the bet
+     * @param color   the color that the player bet on
+     * @return the message after replacement
+     */
+    public String betPlaced(Double replace, BettingColors color) {
+        return bet_placed_raw
+                .replaceAll(ReplaceTags.SUM.getTag(), TextHelper.numberDot(replace))
+                .replaceAll(ReplaceTags.COLOR.getTag(), color.getName());
     }
 
     /**
