@@ -27,7 +27,7 @@ public class ExitItemPress implements Listener {
             player.closeInventory();
             return;
         }
-        Main.getInstance().getGame().openMainMenu(player);
+        Main.getInstance().getGame(player).openMainMenu(player);
     }
 
 }

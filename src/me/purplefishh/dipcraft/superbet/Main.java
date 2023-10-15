@@ -38,7 +38,6 @@ public class Main extends JavaPlugin {
             version.contains("1.14") || version.contains("1.13"));
     @Getter
     private Economy econ = null;
-    @Getter
     private IGame game;
     private HashMap<Player, IGame> separatedGames;
     @Getter
@@ -103,17 +102,28 @@ public class Main extends JavaPlugin {
     }
 
     public void reload() {
+        boolean separatedRouletteBefore = ConfigCollection.getInstance().separate_roulette;
         ConfigHelper.getInstance().reloadConfig();
         //TODO: Fa o lista din configuri folosind DataStorageCollection si da la toate loadData prin for
         ConfigCollection.getInstance().loadData();
         MessagesCollection.getInstance().loadData();
         ItemsCollection.getInstance().loadData();
+
+        if (separatedRouletteBefore) {
+            separatedGames.values().forEach(IGame::delete);
+            separatedGames.clear();
+        } else
+            game.delete();
+        if (!ConfigCollection.getInstance().separate_roulette)
+            game = new GameSingle();
     }
 
-//    public IGame getGame(Player player)
-//    {
-//        if(ConfigCollection.getInstance().separate_roulette)
-//            return separatedGames.get(player);
-//        return game;
-//    }
+    public IGame getGame(Player player) {
+        if (ConfigCollection.getInstance().separate_roulette) {
+            if (!separatedGames.containsKey(player))
+                separatedGames.put(player, new GameSingle());
+            return separatedGames.get(player);
+        }
+        return game;
+    }
 }

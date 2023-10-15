@@ -23,7 +23,7 @@ public class InteractWithPlaceBettingInvEvent implements Listener {
 
         if(event.getCurrentItem().equals(ItemsCollection.getInstance().put))
         {
-            Main.getInstance().getGame().placeBet(p);
+            Main.getInstance().getGame(p).placeBet(p);
             event.setCancelled(true);
             return;
         }
@@ -36,7 +36,7 @@ public class InteractWithPlaceBettingInvEvent implements Listener {
         else
             return;
 
-        Main.getInstance().getGame().addToBetMoney(p, amount);
+        Main.getInstance().getGame(p).addToBetMoney(p, amount);
         event.setCancelled(true);
     }
 }

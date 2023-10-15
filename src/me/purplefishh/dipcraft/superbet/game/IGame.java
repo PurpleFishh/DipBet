@@ -27,4 +27,5 @@ public interface IGame {
     GameStatus getStatus();
 
     PlacedBet getPlayerBet(Player player);
+    void delete();
 }

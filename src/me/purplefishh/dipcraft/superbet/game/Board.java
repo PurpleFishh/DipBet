@@ -26,8 +26,10 @@ public class Board {
     private final ArrayList<BettingColors> rouletteColors;
     private final Stack<BettingColors> lastWinningColors;
     private final Random random;
+    private final IGame game;
 
-    public Board() {
+    public Board(IGame game) {
+        this.game = game;
         gameInv = Bukkit.createInventory(null, 45, ConfigCollection.getInstance().main_inv_name);
         lastColorInv = Bukkit.createInventory(null, 45, ConfigCollection.getInstance().last_colors_inv_name);
         placeBetInv = Bukkit.createInventory(null, 45, ConfigCollection.getInstance().bet_inv_name);
@@ -38,6 +40,7 @@ public class Board {
         rouletteColors = new ArrayList<>(9);
         lastWinningColors = new Stack<>();
         random = new Random();
+
     }
 
 
@@ -54,11 +57,11 @@ public class Board {
     }
 
     public void updateStatusItem(int time) {
-        if (Main.getInstance().getGame().getStatus() == GameStatus.STARTING)
+        if (game.getStatus() == GameStatus.STARTING)
             gameInv.setItem(36, replacePlaceHolders(ItemsCollection.getInstance().status_timer, new Pair<>(ReplaceTags.TIME.getTag(), time)));
-        if (Main.getInstance().getGame().getStatus() == GameStatus.PLAYING)
+        if (game.getStatus() == GameStatus.PLAYING)
             gameInv.setItem(36, ItemsCollection.getInstance().status_running);
-        if (Main.getInstance().getGame().getStatus() == GameStatus.STANDBY)
+        if (game.getStatus() == GameStatus.STANDBY)
             gameInv.setItem(36, ItemsCollection.getInstance().status_no_bet);
     }
 
@@ -81,8 +84,7 @@ public class Board {
             else if (color == BettingColors.RED)
                 color = BettingColors.BLACK;
         }
-        Main.getInstance().getGame().playSound(Sound.BLOCK_CHEST_OPEN, 1);
-
+        game.playSound(Sound.BLOCK_CHEST_OPEN, 1);
 
         new BukkitRunnable() {
             long time = 7L;
@@ -93,7 +95,7 @@ public class Board {
             @Override
             public void run() {
                 if (rotations == totalRotations) {
-                    Main.getInstance().getGame().nextGameState();
+                    game.nextGameState();
                     addWinningColor();
                     updateStatusItem(0);
                     this.cancel();
@@ -125,7 +127,7 @@ public class Board {
                     for (int i = 0; i <= 8; ++i)
                         gameInv.setItem(9 + i, rouletteColors.get(i).getItem());
 
-                    Main.getInstance().getGame().playSound(Sound.BLOCK_NOTE_BLOCK_SNARE, 1);
+                    game.playSound(Sound.BLOCK_NOTE_BLOCK_SNARE, 1);
 
                     if (rotations >= 35)
                         time = speedDown + 7L * (rotations - 33);
@@ -135,7 +137,7 @@ public class Board {
                         time = speedDown + 7L;
                 }
                 speedDown += 7;
-                Main.getInstance().getGame().playSound(Sound.BLOCK_NOTE_BLOCK_BASS, 1);
+                game.playSound(Sound.BLOCK_NOTE_BLOCK_BASS, 1);
             }
 
         }.runTaskTimer(Main.getInstance(), 7L, 7L);

@@ -13,7 +13,7 @@ public class InteractWithItemEvent implements Listener {
         if (event.getItem() == null || !event.getItem().equals(ItemsCollection.getInstance().betting))
             return;
 
-        Main.getInstance().getGame().openMainMenu(event.getPlayer());
+        Main.getInstance().getGame(event.getPlayer()).openMainMenu(event.getPlayer());
         event.setCancelled(true);
     }
 }

@@ -13,7 +13,7 @@ public class MessagesCollection implements DataStorageCollection {
     /**
      * The config file for messages saved in class for easier access
      */
-    private final FileConfiguration msgConfig = ConfigHelper.getInstance().getConfMessages();
+    private FileConfiguration msgConfig;
 
     private static MessagesCollection instance = null;
 
@@ -74,6 +74,8 @@ public class MessagesCollection implements DataStorageCollection {
      * It can be used also for reloading the config
      */
     public void loadData() {
+        msgConfig = ConfigHelper.getInstance().getConfMessages();
+
         water_mark = color(msgConfig.getString("water_mark"));
 
         permission = insertWaterMark(color(msgConfig.getString("permission")));

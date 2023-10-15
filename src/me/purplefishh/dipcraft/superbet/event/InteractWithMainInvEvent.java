@@ -22,11 +22,11 @@ public class InteractWithMainInvEvent implements Listener {
         Player p = (Player) event.getWhoClicked();
 
         if (item.equals(ItemsCollection.getInstance().last_colors))
-            Main.getInstance().getGame().getBoard(p).openLastColorInventory(p);
+            Main.getInstance().getGame(p).getBoard(p).openLastColorInventory(p);
 
         // This math means the positions of putting a bet items(red, green, black)
         if (event.getSlot() == 4 * 9 + 3 - 1 || event.getSlot() == 4 * 9 + 5 - 1 || event.getSlot() == 4 * 9 + 7 - 1)
-            Main.getInstance().getGame().openBettingMenu(p, code(event.getCurrentItem().getType()));
+            Main.getInstance().getGame(p).openBettingMenu(p, code(event.getCurrentItem().getType()));
 
         event.setCancelled(true);
     }

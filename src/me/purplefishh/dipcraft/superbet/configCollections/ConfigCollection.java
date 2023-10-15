@@ -12,7 +12,7 @@ public class ConfigCollection implements DataStorageCollection {
     /**
      * The config file for messages saved in class for easier access
      */
-    private final FileConfiguration config = ConfigHelper.getInstance().getConfig();
+    private FileConfiguration config;
 
     private static ConfigCollection instance = null;
 
@@ -66,6 +66,8 @@ public class ConfigCollection implements DataStorageCollection {
      * It can be used also for reloading the config
      */
     public void loadData() {
+        config = ConfigHelper.getInstance().getConfig();
+
         separate_roulette = config.getBoolean("separate_roulette");
         delete_after_bet = config.getBoolean("delete_after_bet");
         sound_effects = config.getBoolean("sound_effects");

@@ -13,7 +13,7 @@ public class InventoryClose implements Listener {
     public void onBettingInventoryClose(InventoryCloseEvent event) {
         if (!event.getView().getTitle().equals(ConfigCollection.getInstance().bet_inv_name))
             return;
-        if (!Main.getInstance().getGame().getPlayerBet((Player) event.getPlayer()).isPlaced())
-            Main.getInstance().getGame().removePlacedBet((Player) event.getPlayer());
+        if (!Main.getInstance().getGame((Player) event.getPlayer()).getPlayerBet((Player) event.getPlayer()).isPlaced())
+            Main.getInstance().getGame((Player) event.getPlayer()).removePlacedBet((Player) event.getPlayer());
     }
 }

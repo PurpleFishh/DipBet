@@ -9,7 +9,9 @@ import me.purplefishh.dipcraft.superbet.helpers.TextHelper;
 import me.purplefishh.dipcraft.superbet.resorce.BettingColors;
 import me.purplefishh.dipcraft.superbet.utils.PlacedBet;
 import me.purplefishh.dipcraft.superbet.utils.WinningFireworks;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -21,7 +23,7 @@ public class GameSingle implements IGame {
     private GameStatus status;
 
     public GameSingle() {
-        board = new Board();
+        board = new Board(this);
         bets = new HashMap<>();
         status = GameStatus.STANDBY;
     }
@@ -31,7 +33,7 @@ public class GameSingle implements IGame {
     }
 
     public void openBettingMenu(Player player, BettingColors color) {
-        if (status == GameStatus.STANDBY)
+        if (status != GameStatus.PLAYING)
             if (!bets.containsKey(player)) {
                 bets.put(player, new PlacedBet(player, color));
                 board.openBettingInventory(player);
@@ -131,5 +133,12 @@ public class GameSingle implements IGame {
 
     public PlacedBet getPlayerBet(Player player) {
         return bets.get(player);
+    }
+
+    public void delete() {
+        Bukkit.getOnlinePlayers().stream()
+                .filter(player -> ConfigCollection.getInstance().inventoriesName.contains(player.getOpenInventory().getTitle()))
+                .forEach(HumanEntity::closeInventory);
+        bets.clear();
     }
 }
