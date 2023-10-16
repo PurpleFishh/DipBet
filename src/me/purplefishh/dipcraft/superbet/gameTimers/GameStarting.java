@@ -3,13 +3,10 @@ package me.purplefishh.dipcraft.superbet.gameTimers;
 import lombok.Getter;
 import me.purplefishh.dipcraft.superbet.configCollections.ConfigCollection;
 import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;
-import me.purplefishh.dipcraft.superbet.game.GameStatus;
 import me.purplefishh.dipcraft.superbet.game.IGame;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import static me.purplefishh.dipcraft.superbet.helpers.TextHelper.replaceConvertTime;
 
 public class GameStarting extends BukkitRunnable {
 

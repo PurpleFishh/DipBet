@@ -1,22 +1,5 @@
 package me.purplefishh.dipcraft.superbet.utils;
 
-import lombok.Getter;
-import me.purplefishh.dipcraft.superbet.Main;
-import me.purplefishh.dipcraft.superbet.resorce.Repleace;
-import me.purplefishh.dipcraft.superbet.resorce.Resorce;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.io.File;
-import java.io.IOException;
-import java.text.NumberFormat;
-
 public class BaniInv {
 
 	/*public static Inventory invBani() {

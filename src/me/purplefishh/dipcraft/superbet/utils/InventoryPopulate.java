@@ -5,10 +5,7 @@ import me.purplefishh.dipcraft.superbet.configCollections.ItemsCollection;
 import me.purplefishh.dipcraft.superbet.helpers.ItemHelper;
 import me.purplefishh.dipcraft.superbet.resorce.BettingColors;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Stack;
 
 public class InventoryPopulate {

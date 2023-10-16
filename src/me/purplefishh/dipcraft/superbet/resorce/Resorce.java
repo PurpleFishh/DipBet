@@ -1,18 +1,5 @@
 package me.purplefishh.dipcraft.superbet.resorce;
 
-import me.purplefishh.dipcraft.superbet.Main;
-import me.purplefishh.dipcraft.superbet.utils.BaniInv;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public class Resorce {
 
 /*	// Lista Pariu

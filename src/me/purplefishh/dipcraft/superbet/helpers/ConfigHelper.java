@@ -89,4 +89,24 @@ public class ConfigHelper {
             e.printStackTrace();
         }
     }
+
+    /*public void updateOldConfig()
+    {
+        if(config.isString("betting-item-name"))
+        {
+            config.set("items.betting.name", config.getString("betting-item-name"));
+            config.set("betting-item-name", null);
+            config.set("items.betting.material", config.getString("betting-item-id"));
+            config.set("items.betting.lore", config.getList("betting-item-lore"));
+            config.set("betting-item-lore", null);
+            config.set("betting-item-id", null);
+
+            config.set("items.exit.name", config.getString("exit_name"));
+            config.set("exit_name", null);
+            config.set("items.exit.material", config.getString("exit_id"));
+            config.set("exit_id", null);
+
+
+        }
+    }*/
 }

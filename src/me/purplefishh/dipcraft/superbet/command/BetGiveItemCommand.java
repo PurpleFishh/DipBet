@@ -1,6 +1,5 @@
 package me.purplefishh.dipcraft.superbet.command;
 
-import com.comphenix.protocol.PacketType;
 import me.purplefishh.dipcraft.superbet.configCollections.ItemsCollection;
 import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;
 import org.bukkit.Bukkit;
