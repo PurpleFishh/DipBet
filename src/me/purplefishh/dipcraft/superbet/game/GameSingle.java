@@ -7,7 +7,7 @@ import me.purplefishh.dipcraft.superbet.gameTimers.GameStarting;
 import me.purplefishh.dipcraft.superbet.handel.ExitItemPress;
 import me.purplefishh.dipcraft.superbet.helpers.TextHelper;
 import me.purplefishh.dipcraft.superbet.resorce.BettingColors;
-import me.purplefishh.dipcraft.superbet.utils.PlacedBet;
+import me.purplefishh.dipcraft.superbet.resorce.PlacedBet;
 import me.purplefishh.dipcraft.superbet.utils.WinningFireworks;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

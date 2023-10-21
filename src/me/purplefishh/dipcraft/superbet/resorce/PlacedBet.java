@@ -1,8 +1,7 @@
-package me.purplefishh.dipcraft.superbet.utils;
+package me.purplefishh.dipcraft.superbet.resorce;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.purplefishh.dipcraft.superbet.resorce.BettingColors;
 import org.bukkit.entity.Player;
 
 public class PlacedBet {

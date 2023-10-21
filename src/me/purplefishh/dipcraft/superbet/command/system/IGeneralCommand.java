@@ -1,4 +1,4 @@
-package me.purplefishh.dipcraft.superbet.command;
+package me.purplefishh.dipcraft.superbet.command.system;
 
 import org.bukkit.command.CommandSender;
 

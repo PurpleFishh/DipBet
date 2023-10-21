@@ -1,7 +1,7 @@
 package me.purplefishh.dipcraft.superbet.game;
 
 import me.purplefishh.dipcraft.superbet.resorce.BettingColors;
-import me.purplefishh.dipcraft.superbet.utils.PlacedBet;
+import me.purplefishh.dipcraft.superbet.resorce.PlacedBet;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 

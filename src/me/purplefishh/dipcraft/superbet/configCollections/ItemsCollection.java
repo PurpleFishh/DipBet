@@ -1,8 +1,8 @@
 package me.purplefishh.dipcraft.superbet.configCollections;
 
 import me.purplefishh.dipcraft.superbet.helpers.ConfigHelper;
+import me.purplefishh.dipcraft.superbet.helpers.ItemConstructor;
 import me.purplefishh.dipcraft.superbet.helpers.ItemHelper;
-import me.purplefishh.dipcraft.superbet.utils.ItemConstructor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 

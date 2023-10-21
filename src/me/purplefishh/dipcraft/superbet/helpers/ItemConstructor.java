@@ -1,4 +1,4 @@
-package me.purplefishh.dipcraft.superbet.utils;
+package me.purplefishh.dipcraft.superbet.helpers;
 
 import com.cryptomorin.xseries.XItemStack;
 import org.bukkit.configuration.ConfigurationSection;

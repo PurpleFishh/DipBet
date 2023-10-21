@@ -1,4 +1,4 @@
-package me.purplefishh.dipcraft.superbet.command;
+package me.purplefishh.dipcraft.superbet.command.system;
 
 import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;
 import me.purplefishh.dipcraft.superbet.utils.Tuple;

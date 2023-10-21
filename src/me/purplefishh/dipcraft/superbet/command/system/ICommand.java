@@ -1,4 +1,4 @@
-package me.purplefishh.dipcraft.superbet.command;
+package me.purplefishh.dipcraft.superbet.command.system;
 
 /**
  * Interface used for commands

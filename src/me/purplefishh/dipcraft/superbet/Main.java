@@ -2,6 +2,7 @@ package me.purplefishh.dipcraft.superbet;
 
 import lombok.Getter;
 import me.purplefishh.dipcraft.superbet.command.*;
+import me.purplefishh.dipcraft.superbet.command.system.CommandGroup;
 import me.purplefishh.dipcraft.superbet.configCollections.ConfigCollection;
 import me.purplefishh.dipcraft.superbet.configCollections.ItemsCollection;
 import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;

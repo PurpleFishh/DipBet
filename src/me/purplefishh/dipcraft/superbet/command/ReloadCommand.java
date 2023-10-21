@@ -1,6 +1,7 @@
 package me.purplefishh.dipcraft.superbet.command;
 
 import me.purplefishh.dipcraft.superbet.Main;
+import me.purplefishh.dipcraft.superbet.command.system.ICommand;
 import me.purplefishh.dipcraft.superbet.configCollections.MessagesCollection;
 import org.bukkit.command.CommandSender;
 
