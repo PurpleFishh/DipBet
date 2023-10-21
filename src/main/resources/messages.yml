@@ -62,7 +62,7 @@ helpbet: "&6&l/bet &r&e- give the player the item that opens the roulette invent
 # Help for /bet inventory
 helpbetinventory: "&6&l/bet inventory &r&e- open the roulette inventory"
 # Help for /bet <player name>
-helpbetgive: "&6&l/bet <player name> &r&e- give the item that opens the roulette inventory to an player"
+helpbetgive: "&6&l/bet <*player name> &r&e- give the item that opens the roulette inventory to an player"
 # Help for /bet remove
 helpbetremove: "&6&l/bet remove &r&e- remove the bet item from your inventory"
 # Help for /bet reload

@@ -12,15 +12,24 @@ public class BetGiveItemCommand implements ICommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Player sendTo = null;
-        if (args.length > 0)
+        if (args.length > 0) {
+            if (!sender.hasPermission("bet.itemgive.other")) {
+                sender.sendMessage(MessagesCollection.getInstance().permission);
+                return;
+            }
             if (Bukkit.getServer().getPlayerExact(args[0]) != null && Bukkit.getServer().getPlayerExact(args[0]).isOnline())
                 sendTo = Bukkit.getServer().getPlayerExact(args[0]);
             else
                 sender.sendMessage(MessagesCollection.getInstance().offline_player);
-        else if (!(sender instanceof Player))
+        } else if (!(sender instanceof Player))
             sender.sendMessage(MessagesCollection.getInstance().players_only);
-        else
+        else {
+            if (!sender.hasPermission("bet.itemgive.himself")) {
+                sender.sendMessage(MessagesCollection.getInstance().permission);
+                return;
+            }
             sendTo = (Player) sender;
+        }
         giveItem(Objects.requireNonNull(sendTo, "Tried to send item to a player but the player was null!"));
     }
 

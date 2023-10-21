@@ -6,8 +6,6 @@ import me.purplefishh.dipcraft.superbet.resorce.BettingColors;
 import me.purplefishh.dipcraft.superbet.utils.ReplaceTags;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import java.util.ArrayList;
-
 import static me.purplefishh.dipcraft.superbet.helpers.TextHelper.color;
 
 public class MessagesCollection implements DataStorageCollection {
@@ -53,7 +51,14 @@ public class MessagesCollection implements DataStorageCollection {
     /**
      * Strings for the help menu
      */
-    public ArrayList<String> helpLines = new ArrayList<>();
+    public String
+            helpHeader,
+            helpBet,
+            helpBetInventory,
+            helpBetGive,
+            helpBetRemove,
+            helpBetReload,
+            helpCommand;
 
     /**
      * Message form config with keys that need to be replaced
@@ -90,13 +95,13 @@ public class MessagesCollection implements DataStorageCollection {
         wrong_command = insertWaterMark(color(msgConfig.getString("wrong_command")));
         players_only = insertWaterMark(color(msgConfig.getString("players_only")));
 
-        helpLines.add(color(msgConfig.getString("helpheader")));
-        helpLines.add(color(msgConfig.getString("helpbet")));
-        helpLines.add(color(msgConfig.getString("helpbetinventory")));
-        helpLines.add(color(msgConfig.getString("helpbetgive")));
-        helpLines.add(color(msgConfig.getString("helpbetremove")));
-        helpLines.add(color(msgConfig.getString("helpbetreload")));
-        helpLines.add(color(msgConfig.getString("helpcomm")));
+        helpHeader = color(msgConfig.getString("helpheader"));
+        helpBet = color(msgConfig.getString("helpbet"));
+        helpBetInventory = color(msgConfig.getString("helpbetinventory"));
+        helpBetGive = color(msgConfig.getString("helpbetgive"));
+        helpBetRemove = color(msgConfig.getString("helpbetremove"));
+        helpBetReload = color(msgConfig.getString("helpbetreload"));
+        helpCommand = color(msgConfig.getString("helpcomm"));
 
         money_selectRaw = insertWaterMark(color(msgConfig.getString("money_select")));
         winRaw = insertWaterMark(color(msgConfig.getString("win")));
